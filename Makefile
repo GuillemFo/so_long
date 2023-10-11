@@ -10,17 +10,19 @@ OBJ = $(addprefix $(PATH_OBJ),$(SRC:.c=.o))
 
 CFLAGS = -Wall -Wextra -Werror -I./Include
 
-all: makelib tmp $(NAME)
+all: makelib makeminilibx tmp $(NAME)
 
 tmp:
 	mkdir -p $(PATH_OBJ)
 
 $(NAME): $(OBJ)
-	cc $(CFLAGS) $(OBJ) ./libft/libft.a -o $(NAME)
-
+	cc $(CFLAGS) $(OBJ) ./libft/libft.a ./MiniLibX/libmlx.a -o $(NAME)
 
 makelib: 
 	$(MAKE) -C ./libft 
+
+makeminilibx:
+	$(MAKE) -C ./MiniLibX
 
 $(PATH_OBJ)%.o: %.c ./Include/libft.h ./Include/so_long.h Makefile
 	@mkdir -p $(dir $@)
@@ -31,10 +33,13 @@ re: fclean all
 makefclean:
 	$(MAKE) -C ./libft fclean
 
+makefcleanminilibx:
+	$(MAKE) -C ./MiniLibX clean
+
 clean:
 	rm -rf $(PATH_OBJ)
 
-fclean: clean makefclean
+fclean: clean makefclean makefcleanminilibx
 	rm -rf $(NAME)
 
 .PHONY: all re clean fclean
