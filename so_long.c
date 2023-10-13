@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/11 18:40:32 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:36:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc < 2)
-		return (ft_printf("Error"));
+	
 	
 	//aplicar get_nxt_line de todo argv
 	//comprobar que si es primera fila son todo paredes
@@ -26,3 +25,15 @@ int	main(int argc, char **argv)
 	//comprobar que sea accesible cada uno de ellos
 	//plantear mover caracter???
 }
+
+/*Your program has to take as parameter a map description file ending with the .ber extension.
+
+The map has to be constructed with 3 components: walls, collectibles, and free
+space.
+• The map can be composed of only these 5 characters:
+0 for an empty space,
+1 for a wall,
+C for a collectible,
+E for a map exit,
+P for the player’s starting position.
+*/
