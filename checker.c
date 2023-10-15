@@ -6,52 +6,47 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/15 18:04:19 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:15:53 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
-t_map	ft_start_all(void)
+t_game	ft_start_all(void)
 {
-	t_map	map;
+	t_game	game;
 
-	map.row = 0;
-	map.col = 0;
-	map.player = 0;
-	map.coins = 0;
-	map.exit = 0;
-	return (map);
+	game.row = 0;
+	game.col = 0;
+	game.player = 0;
+	game.coins = 0;
+	game.exit = 0;
+	return (game);
 }
 
-char	**check_args(int argc, char **argv, t_map *map)
+char	**check_args(int argc, char **argv, t_game *game)
 {
 	int	fd;
 
 	if (argc != 2)
-		return (ft_printf("Error, invalid number of arguments\n"), NULL);
-	if (ft_strlen(ft_strstr(file, ".ber")) != 4)
-		return ((1, "ERROR\nFile should be .ber type\n"), NULL);
-	fd = open(file, O_RDONLY);
+		message (ft_printf("Error, invalid number of arguments\n"), NULL);
+	if (ft_strlen(ft_strstr(argv[1], ".ber")) != 4)
+		message ((1, "ERROR\nFile should be .ber type\n"), NULL);
+	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return ((1, "ERROR\nFile does not open\n"), NULL);
-	return (check_map(fd, map));
+		message ((1, "ERROR\nFile does not open\n"), game);
+	load_game(fd, game)
+	return ();
 }
 
-char	**check_map(int fd, t_map *map)
+void	load_game(int fd, t_game *game)
 {
-	char	*map_row;
-	char	**map;
+	char	*line;
+	char	*all_game;
+	
+	while()
 
-	map_row = NULL;
-	map = NULL;
-	*map = ft_start_all();
-	ft_read_map(fd, &map_row);
-	map = ft_split(map_row, '\n');
-	free(map_row);
-	if (!map)
+	if (!game)
 		return ("Memory allocation error!\n");
-	return (map);
+	return (game);
 }
-
-void	ft_read_map(int fd, t_map map *map)
