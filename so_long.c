@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/15 15:38:05 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:23:34 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 int	main(int argc, char **argv)
 {
-	t_map		map;
-	
+
+
 }
 
-	//aplicar get_nxt_line de todo argv
-	//comprobar que si es primera fila son todo paredes
-	//comprobar que primer y ultimo caracter son paredes
-	//comprobar el lenght de todos par que sea el mismo. (cada vez que se añade linea)
-	//comprobar que ultima linea son todo paredes.
-	//comprobar que hay minimo un premio una puerta y un caracter
-	//comprobar que sea accesible cada uno de ellos
-	//plantear mover caracter???
+
+// aplicar get_nxt_line de todo argv
+// comprobar que si es primera fila son todo paredes
+// comprobar que primer y ultimo caracter son paredes
+// comprobar el lenght de todos par que sea el mismo. (cada vez que se añade linea)
+// comprobar que ultima linea son todo paredes.
+// comprobar que hay minimo un premio una puerta y un caracter
+// comprobar que sea accesible cada uno de ellos
+// plantear mover caracter???
 /*Your program has to take as parameter a map description file ending with the .ber extension.
 
 The map has to be constructed with 3 components: walls, collectibles, and free
