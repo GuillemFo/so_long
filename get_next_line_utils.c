@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:10:04 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/06/28 13:42:29 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:52:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "./Include/get_next_line.h"
 
 size_t	ft_strlen(char *var)
 {

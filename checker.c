@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/15 19:15:53 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:59:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
-t_game	ft_start_all(void)
+t_game	ft_start_game(void)
 {
 	t_game	game;
 
@@ -44,8 +44,12 @@ void	load_game(int fd, t_game *game)
 	char	*line;
 	char	*all_game;
 	
-	while()
-
+	while()//rd bytes del gnl ??
+	{
+		line = get_next_line(fd);
+		all_game = ft_strjoin(all_game, line);
+	}
+	ft_start_game();
 	if (!game)
 		return ("Memory allocation error!\n");
 	return (game);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:50:07 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/06/28 13:51:47 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:52:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "./Include/get_next_line.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
