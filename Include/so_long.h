@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/24 14:44:45 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:26:15 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "get_next_line.h"
 # include "libft.h"
-//# include <mlx.h>
+# include "../MiniLibX/mlx.h"
 
 typedef struct s_game
 {
