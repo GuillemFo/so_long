@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/15 19:15:53 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:02:51 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	message(char *msg, t_game *game)
 
 int	main(int argc, char **argv)
 {
+	t_game	*game;
 
+	check_args();
 
 }
 
