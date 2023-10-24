@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/24 16:10:56 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:03:45 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,33 @@ t_game	ft_start_game(void)
 
 	game.row = 0;
 	game.col = 0;
-	game.player = 0;
-	game.coins = 0;
-	game.exit = 0;
+	game.playerpos = 0;
+	game.coinpos = 0;
+	game.exitpos = 0;
+	game.coin = 'C';
+	game.player = 'P';
+	game.exit = 'E';
 	return (game);
 }
 
-void	check_map_playable(int fd, t_game *game)
+t_game	*check_map_playable(int fd, t_game *game)
 {
-	
+	int		i;
+	char	*line;
+
+	i = 0;
+	line = get_next_line(fd);
+	game->game_test[i] = line;
+	while (line)
+	{
+		i++;
+		free(line);
+		line = get_next_line(fd);
+		game->game_test[i] = line;
+	}
+	free(line);
+	/// check lines, find and save coin player exit pos [x] [y]
+	return (game);
 }
 
 void	check_map_size(int fd, t_game *game)
