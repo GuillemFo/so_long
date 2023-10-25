@@ -6,13 +6,13 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/25 16:46:34 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:34:59 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
-void	message(char *msg, t_game *game)
+void	message(char *msg, t_game game)
 {
 	ft_printf("%s", msg);
 	//falta free de todo game
@@ -21,7 +21,7 @@ void	message(char *msg, t_game *game)
 
 int	main(int argc, char **argv)
 {
-	t_game	*game;
+	t_game	game;
 
 	check_args();
 

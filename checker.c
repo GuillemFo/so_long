@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/25 17:11:59 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:54:41 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ t_game	count_obj(t_game game, char **game_test)
 	game.tools.x = -1;
 	game.tools.y = -1;
 
-	while (++game.tools.y != game.col)
+	while (++game.tools.y < game.col)
 	{
-		while (++game.tools.x != game.row)
+		while (++game.tools.x < game.row)
 		{	if (game.counter.player != 1)
 				message ("ERROR\nMore than one player found\n", game);
 			if (game.counter.exit != 1)
@@ -72,9 +72,9 @@ t_game	find_pos(t_game game, char **game_test)
 	game.tools.x = -1;
 	game.tools.y = -1;
 
-	while (++game.tools.y != game.col)
+	while (++game.tools.y < game.col)
 	{
-		while (++game.tools.x != game.row)
+		while (++game.tools.x < game.row)
 		{
 			if (game_test[game.tools.y][game.tools.x] == 'P') //Y es columna -- X es fila -- 
 			{								//el doble puntero guarda primero columna y luego fila?
@@ -110,7 +110,7 @@ while y != game.col
 
 */
 
-void	check_bounds(t_game game, char **game_test)
+void	check_bounds(t_game game, char **game_test) //add **game_test to the message func to be able to free all info?
 {
 	game.tools.x = 0;
 	game.tools.y = 0;
@@ -144,16 +144,13 @@ t_game	check_map_playable(int fd, t_game game)
 
 	i = 0;
 	game_test = malloc (game.col * sizeof(char *));
-	line = get_next_line(fd);
-	game_test[i] = ft_strdup(line);
-	while (line)
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		i++;
-		free(line);
-		line = get_next_line(fd);
-		if (line == NULL)
-			break;
 		game_test[i] = ft_strdup(line);
+		if (game_test[i] == NULL)
+			ft_freemalloc(game_test, i);
+		free(line);
+		i++;
 	}
 					//free(line);
 	check_bounds(game, &game_test);
@@ -168,8 +165,8 @@ t_game	check_map_size(int fd, t_game game)
 	char	*line;
 
 	game = ft_start_game();
-	if (!game)
-		message("ERROR\nMemory allocation error!\n", game);
+	// if (!game)
+	// 	message("ERROR\nMemory allocation error!\n", game);
 	line = get_next_line(fd);
 	if (line == 0)
 		message("ERROR\nError reading first line\n", game);
@@ -199,7 +196,7 @@ t_game	check_args(int argc, char **argv, t_game game)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		message("ERROR\nFile does not open\n", game);
-	check_map_size(fd, game);
+	game = check_map_size(fd, game);
 	close (fd);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
