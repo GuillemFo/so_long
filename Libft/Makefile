@@ -41,7 +41,9 @@ SRC	=	ft_isalnum.c\
 		ft_u.c \
 		ft_printstring.c \
 		ft_printhex.c \
-		ft_itoaprint.c
+		ft_itoaprint.c \
+		get_next_line.c \
+		get_next_line_utils.c \
 
 BONUS = ft_lstnew_bonus.c \
 		ft_lstsize_bonus.c\

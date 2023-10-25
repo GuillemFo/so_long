@@ -6,14 +6,14 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/25 17:34:42 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:00:24 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "get_next_line.h"
+# include "../Libft/get_next_line.h"
 # include "libft.h"
 # include "../MiniLibX/mlx.h"
 
@@ -48,5 +48,7 @@ typedef struct s_game		//donde meto la poss de diferentes monedas?
 
 t_game	check_args(int argc, char **argv, t_game game);
 void	message(char *msg, t_game game);
+t_game	ft_start_game(void);
+void	*ft_freemalloc(char **s2, int k);
 
 #endif

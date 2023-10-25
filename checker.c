@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/25 17:54:41 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:03:26 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,9 @@ t_game	check_map_playable(int fd, t_game game)
 		i++;
 	}
 					//free(line);
-	check_bounds(game, &game_test);
-	game = count_obj(game, &game_test);
-	game = find_pos(game, &game_test);
+	check_bounds(game, game_test);
+	game = count_obj(game, game_test);
+	game = find_pos(game, game_test);
 	/// check lines, find and save: coin, player & exit pos [x] [y]
 	return (game);
 }

@@ -3,7 +3,7 @@ NAME = so_long
 
 PATH_OBJ = tmp/
 
-SRC = so_long.c
+SRC = so_long.c checker.c utils.c
 
 OBJ = $(addprefix $(PATH_OBJ),$(SRC:.c=.o))
 	

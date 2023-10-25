@@ -6,7 +6,19 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:54:53 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/15 14:13:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:58:10 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./Include/so_long.h"
+
+void	*ft_freemalloc(char **s2, int k)
+{
+	while (k >= 0)
+	{
+		free(s2[k]);
+		k--;
+	}
+	free(s2);
+	return (NULL);
+}

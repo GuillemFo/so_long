@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:54:03 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/09/06 18:02:19 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:47:38 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 typedef struct s_list
 {
@@ -76,4 +82,11 @@ int		ft_hexcap(unsigned int s);
 int		ft_ptr(unsigned long s);
 int		ft_itoaprint(int n);
 
+/* get_next_line */
+
+
+char		*get_next_line(int fd);
+// int			ft_strchr(char *var, int c);
+// size_t		ft_strlen(char *var);
+char		*ft_strjoinplus(char *s1, char *s2);
 #endif
