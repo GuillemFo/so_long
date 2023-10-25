@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/25 12:54:43 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:05:44 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ typedef struct s_point
 	int		y;
 }			t_point;
 
+typedef struct s_count
+{
+	int	coin;
+	int	player;
+	int	exit;
+	int	moves;
+}		t_count;
 
-
-typedef struct s_game
+typedef struct s_game		//donde meto la poss de diferentes monedas?
 {
 	int			row;
 	int			col;
@@ -35,8 +41,9 @@ typedef struct s_game
 	t_point		playerpos;
 	t_point		coinpos;
 	t_point		exitpos;
+	t_count		counter;
 }				t_game;
 
-t_game	*check_args(int argc, char **argv, t_game *game);
+t_game	check_args(int argc, char **argv, t_game game);
 
 #endif

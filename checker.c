@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/25 14:06:57 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:08:21 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,43 @@ t_game	ft_start_game(void)
 	game.col = 0;
 	game.playerpos.x = 0;
 	game.playerpos.y = 0;
+	game.exitpos.x = 0;
+	game.exitpos.y = 0;
+	game.counter.player = 0;
+	game.counter.coin = 0;
+	game.counter.exit = 0;
+	game.counter.moves = 0;
 	game.player = 'P';
 	game.coin = 'C';
 	game.exit = 'E';
+	return (game);
+}
+
+t_game	count_obj(t_game game, char **game_test)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+
+	while (y != game.col)
+	{
+		while (x != game.row)
+		{	if (game.counter.player > 1)
+				message ((1, "ERROR\nMore than one player found\n"), game);
+			if (game.counter.exit > 1)
+				message ((1, "ERROR\nMore than one exit found\n"), game);
+			else if (game_test[y][x] == 'P') //y es columna -- x es fila -- 
+				game.counter.player++;	//el doble puntero guarda primero columna y luego fila?
+			else if (game_test[y][x] == 'C')
+				game.counter.coin++;
+			else if (game_test[y][x] == 'E')
+				game.counter.exit++;
+			x++;
+		}
+		y++;
+	}
 	return (game);
 }
 
@@ -44,14 +78,35 @@ t_game	find_pos(t_game game, char **game_test)
 	x = 0;
 	y = 0;
 
-	while (game_test[x][y] )
-
-
+	while (y != game.col)
+	{
+		while (x != game.row)
+		{
+			if (game_test[y][x] == 'P') //y es columna -- x es fila -- 
+			{								//el doble puntero guarda primero columna y luego fila?
+				game.playerpos.x = x;
+				game.playerpos.y = y;
+			}
+			else if (game_test[y][x] == 'C')
+			{
+				game.coinpos.x = x;
+				game.coinpos.y = y;
+			}
+			else if (game_test[y][x] == 'E')
+			{
+				game.exitpos.x = x;
+				game.exitpos.y = y;
+			}
+			x++;
+		}
+		y++;
+	}
 	return (game);
 }
 
+
 //duplico info
-//aplicar strdup to create mallocs per each pos
+//apply strdup to create mallocs per each pos
 /*
 while y != game.col
 	while line[x] != '\0'
@@ -62,6 +117,7 @@ while y != game.col
 
 
 */
+
 t_game	check_map_playable(int fd, t_game game)
 {
 	int		i;
@@ -69,9 +125,9 @@ t_game	check_map_playable(int fd, t_game game)
 	char	**game_test;
 
 	i = 0;
-	game_test = malloc ( *sizeof(char *));
+	game_test = malloc (game.col * sizeof(char *));
 	line = get_next_line(fd);
-	game_test[i] = line;
+	game_test[i] = ft_strdup(line);
 	while (line)
 	{
 		i++;
@@ -79,11 +135,12 @@ t_game	check_map_playable(int fd, t_game game)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
-		game_test[i] = line;
+		game_test[i] = ft_strdup(line);
 	}
 					//free(line);
+	game = count_obj(game, &game_test);
 	game = find_pos(game, &game_test);
-	/// check lines, find and save coin player exit pos [x] [y]
+	/// check lines, find and save: coin, player & exit pos [x] [y]
 	return (game);
 }
 
@@ -93,7 +150,7 @@ t_game	check_map_size(int fd, t_game game)
 
 	game = ft_start_game();
 	if (!game)
-		return ("Memory allocation error!\n");
+		message ((1, "Memory allocation error!\n"), game);
 	line = get_next_line(fd);
 	if (line == 0)
 		message ((1, "ERROR\nError reading first line\n"), game);
