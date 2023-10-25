@@ -34,7 +34,7 @@ makefclean:
 	$(MAKE) -C ./libft fclean
 
 makefcleanminilibx:
-	$(MAKE) -C ./MiniLibX clean
+	$(MAKE) -C ./MiniLibX fclean
 
 clean:
 	rm -rf $(PATH_OBJ)
