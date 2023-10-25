@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/24 15:02:51 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:46:34 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	message(char *msg, t_game *game)
 {
 	ft_printf("%s", msg);
-	//falta free de todos nodos
+	//falta free de todo game
 	exit(0);
 }
 
