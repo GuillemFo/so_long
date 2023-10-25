@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/24 16:43:36 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:54:43 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,26 @@
 # include "libft.h"
 # include "../MiniLibX/mlx.h"
 
+typedef struct s_point
+{
+	int		x;
+	int		y;
+}			t_point;
+
+
+
 typedef struct s_game
 {
-	int		row;
-	int		col;
-	int		playerpos;
-	int		coinpos;
-	int		exitpos;
-	char	player;
-	char	coin;
-	char	exit;
-	char	**game_test;
-	char	**game_ok;
-}			t_game;
+	int			row;
+	int			col;
+	char		player;
+	char		coin;
+	char		exit;
+	t_point		playerpos;
+	t_point		coinpos;
+	t_point		exitpos;
+}				t_game;
 
-char	**check_args(int argc, char **argv, t_game *game);
+t_game	*check_args(int argc, char **argv, t_game *game);
 
 #endif
