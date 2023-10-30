@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/30 14:17:31 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:10:54 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ t_game	ft_start_game(void)
 {
 	t_game	game;
 
-	game.row = 0;
 	game.col = 0;
-	game.playerpos.x = 0;
+	game.row = 1;
 	game.playerpos.y = 0;
-	game.exitpos.x = 0;
+	game.playerpos.x = 0;
 	game.exitpos.y = 0;
+	game.exitpos.x = 0;
 	game.counter.player = 0;
 	game.counter.coin = 0;
 	game.counter.exit = 0;
@@ -44,17 +44,17 @@ t_game	ft_start_game(void)
 
 t_game	count_obj(t_game game, char **game_test)
 {
-	game.tools.y = -1;
-	while (++game.tools.y < game.col)
+	game.tools.x = -1;
+	while (++game.tools.x < game.row)
 	{
-		game.tools.x = -1;
-		while (++game.tools.x < game.row)
+		game.tools.y = -1;
+		while (++game.tools.y < game.col)
 		{	
-			if (game_test[game.tools.y][game.tools.x] == 'P') //y es columna -- x es fila -- 
-				game.counter.player++;	//el doble puntero guarda primero columna y luego fila?
-			else if (game_test[game.tools.y][game.tools.x] == 'C')
+			if (game_test[game.tools.x][game.tools.y] == 'P')
+				game.counter.player++;
+			else if (game_test[game.tools.x][game.tools.y] == 'C')
 				game.counter.coin++;
-			else if (game_test[game.tools.y][game.tools.x] == 'E')
+			else if (game_test[game.tools.x][game.tools.y] == 'E')
 				game.counter.exit++;
 		}
 	}
@@ -69,26 +69,26 @@ t_game	count_obj(t_game game, char **game_test)
 
 t_game	find_pos(t_game game, char **game_test)
 {
-	game.tools.y = -1;
-	while (++game.tools.y < game.col)
+	game.tools.x = -1;
+	while (++game.tools.x < game.row)
 	{
-		game.tools.x = -1;
-		while (++game.tools.x < game.row)
+		game.tools.y = -1;
+		while (++game.tools.y < game.col)
 		{
-			if (game_test[game.tools.y][game.tools.x] == 'P') //Y es columna -- X es fila -- 
-			{								//el doble puntero guarda primero columna y luego fila?
-				game.playerpos.x = game.tools.x;
+			if (game_test[game.tools.x][game.tools.y] == 'P') 
+			{								
 				game.playerpos.y = game.tools.y;
+				game.playerpos.x = game.tools.x;
 			}
-			else if (game_test[game.tools.y][game.tools.x] == 'C')
+			else if (game_test[game.tools.x][game.tools.y] == 'C')
 			{
-				game.coinpos.x = game.tools.x;
 				game.coinpos.y = game.tools.y;
+				game.coinpos.x = game.tools.x;
 			}
-			else if (game_test[game.tools.y][game.tools.x] == 'E')
+			else if (game_test[game.tools.x][game.tools.y] == 'E')
 			{
-				game.exitpos.x = game.tools.x;
 				game.exitpos.y = game.tools.y;
+				game.exitpos.x = game.tools.x;
 			}
 		}
 	}
@@ -99,7 +99,7 @@ t_game	find_pos(t_game game, char **game_test)
 //duplico info
 //apply strdup to create mallocs per each pos
 /*
-while y != game.col
+while y != game.row
 	while line[x] != '\0'
 		game_test[y][x] = line[x];
 		x++;
@@ -111,38 +111,38 @@ while y != game.col
 
 void	check_bounds(t_game game, char **game_test) //add **game_test to the message func to be able to free all info?
 {
-	game.tools.x = 0;
 	game.tools.y = 0;
-	while (game_test[0][game.tools.x] != '\0' && game_test[0][game.tools.x] != '\n')
+	game.tools.x = 0;
+	while (game_test[0][game.tools.y] != '\0' && game_test[0][game.tools.y] != '\n')
 	{
-		if (game_test[0][game.tools.x] != '1')
+		if (game_test[0][game.tools.y] != '1')
 		{
-			printf("%d line 120\n", game.tools.x);//Printf debug
+			printf("%d line 120\n", game.tools.y);//Printf debug
 			message("ERROR - 1\nIncorrect boundaries\n", game);//debug error message modified;
 		}
-		game.tools.x++;
+		game.tools.y++;
 	}
-	game.tools.x = 0;
-	while (game_test[game.col][game.tools.x] != '\0')
+	game.tools.y = 0;
+	while (game_test[game.row][game.tools.y] != '\0')
 	{
-		if (game_test[game.col][game.tools.x] != '1')
+		if (game_test[game.row][game.tools.y] != '1')
 		{
-			printf("%s 130\n", game_test[game.col]);//Printf debug
+			printf("%s 130\n", game_test[game.row]);//Printf debug
 			message("ERROR - 2\nIncorrect boundaries\n", game);//debug error message modified;
 		}
-		game.tools.x++;
+		game.tools.y++;
 	}
-	while (game.tools.y < game.col)
+	while (game.tools.x < game.row)
 	{
-		if (game_test[game.tools.y][0] != '1')
+		if (game_test[game.tools.x][0] != '1')
 			message("ERROR - A\nIncorrect boundaries\n", game);
-		printf("%d\n", game.row);
-		if (game_test[game.tools.y][game.row -1] != '1')
+		printf("%d\n", game.col);
+		if (game_test[game.tools.x][game.col -1] != '1')
 		{
-			printf("%s 141\n", game_test[game.tools.y]);//Printf debug
+			printf("%s 141\n", game_test[game.tools.x]);//Printf debug
 			message("ERROR - B\nIncorrect boundaries\n", game);//debug error message modified;
 		}
-		game.tools.y++;
+		game.tools.x++;
 	}
 }
 
@@ -158,8 +158,8 @@ t_game	check_map_playable(char *argv, t_game game)
 	if (fd < 0)
 		message("ERROR\nFile does not open\n", game);
 	i = 0;
-	ft_printf("GAME COL %d\n", game.col);
-	game_test = malloc (game.col * sizeof(char *));
+	ft_printf("GAME ROW %d\n", game.row);
+	game_test = malloc (game.row * sizeof(char *));
 	if (!game_test)
 		return (ft_printf("AAAAAAAA"), game);
 	line = get_next_line(fd);	
@@ -182,11 +182,11 @@ t_game	check_map_playable(char *argv, t_game game)
 	game_test[i] = NULL;
 	ft_printf("+++++++++++%s", game_test[0]);
 	close (fd);
-	game.tools.y = 0;
-	while (game_test[game.tools.y])
+	game.tools.x = 0;
+	while (game_test[game.tools.x])
 	{
-		ft_printf("%s", game_test[game.tools.y]);
-		game.tools.y++;
+		ft_printf("%s", game_test[game.tools.x]);
+		game.tools.x++;
 	}
 	//check_bounds(game, game_test);
 	//game = count_obj(game, game_test);
@@ -205,17 +205,17 @@ t_game	check_map_size(int fd, t_game game)
 	line = get_next_line(fd);
 	if (line == 0)
 		message("ERROR\nError reading first line\n", game);	
-	game.row = ft_strlen_n(line);
+	game.col = ft_strlen_n(line);
 	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line == NULL)
 			return (game);
-		if (game.row != ((int)ft_strlen_n(line)))
+		if (game.col != ((int)ft_strlen_n(line)))
 			message("ERROR\nMap not correct\n", game);
 		else
-			game.col++;
+			game.row++;
 	}
 	return (game);
 }
