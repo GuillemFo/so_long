@@ -16,7 +16,7 @@ tmp:
 	mkdir -p $(PATH_OBJ)
 
 $(NAME): $(OBJ)
-	cc $(CFLAGS) $(OBJ) ./libft/libft.a -framework OpenGL -framework AppKit -o $(NAME)
+	cc $(CFLAGS) $(OBJ) ./libft/libft.a -framework OpenGL -framework AppKit -o $(NAME) -L MiniLibX -lmlx
 
 makelib: 
 	$(MAKE) -C ./libft 

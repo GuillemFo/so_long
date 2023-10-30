@@ -6,11 +6,12 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/30 17:40:09 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:53:10 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
+
 
 void	message(char *msg, t_game game)
 {
@@ -23,8 +24,10 @@ void	message(char *msg, t_game game)
 
 int	main(int argc, char **argv)
 {
+	void	*mlx;
 	t_game	game;
 
+	mlx = mlx_init();
 	game = ft_start_game();
 	game = check_args(argc, argv, game);
 	
