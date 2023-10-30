@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/25 19:21:43 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:40:09 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	message(char *msg, t_game game)
 {
 	ft_printf("%s", msg);
-	free(game.map);
+	(void)game.tools;
+	//free(game.map);
 	//falta free de todo game
 	exit(0);
 }
@@ -26,6 +27,7 @@ int	main(int argc, char **argv)
 
 	game = ft_start_game();
 	game = check_args(argc, argv, game);
+	
 	return (0);
 }
 

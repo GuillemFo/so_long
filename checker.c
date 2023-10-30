@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/30 15:10:54 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:31:39 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_game	ft_start_game(void)
 {
 	t_game	game;
 
-	game.col = 0;
-	game.row = 1;
+	game.col_y = 0;
+	game.row_x = 1;
 	game.playerpos.y = 0;
 	game.playerpos.x = 0;
 	game.exitpos.y = 0;
@@ -45,23 +45,29 @@ t_game	ft_start_game(void)
 t_game	count_obj(t_game game, char **game_test)
 {
 	game.tools.x = -1;
-	while (++game.tools.x < game.row)
+	while (++game.tools.x < game.row_x)
 	{
 		game.tools.y = -1;
-		while (++game.tools.y < game.col)
+		while (++game.tools.y < game.col_y)
 		{	
-			if (game_test[game.tools.x][game.tools.y] == 'P')
-				game.counter.player++;
-			else if (game_test[game.tools.x][game.tools.y] == 'C')
-				game.counter.coin++;
-			else if (game_test[game.tools.x][game.tools.y] == 'E')
-				game.counter.exit++;
+			if (game_test[game.tools.x][game.tools.y] != '0' 
+				&& game_test[game.tools.x][game.tools.y] != '1')
+				{
+					if (game_test[game.tools.x][game.tools.y] == 'P')
+						game.counter.player++;
+					else if (game_test[game.tools.x][game.tools.y] == 'C')
+						game.counter.coin++;
+					else if (game_test[game.tools.x][game.tools.y] == 'E')
+						game.counter.exit++;
+					else
+						message ("ERROR\nWrong imput\n", game);
+				}
 		}
 	}
 	if (game.counter.player != 1)
-				message ("ERROR\nMore than one player found\n", game);
+				message ("ERROR\nNon or too many players\n", game);
 	if (game.counter.exit != 1)
-				message ("ERROR\nMore than one exit found\n", game);
+				message ("ERROR\nNon or too many exits\n", game);
 	if (game.counter.coin < 1)
 		message ("ERROR\nNo coins found\n", game);
 	return (game);
@@ -70,10 +76,10 @@ t_game	count_obj(t_game game, char **game_test)
 t_game	find_pos(t_game game, char **game_test)
 {
 	game.tools.x = -1;
-	while (++game.tools.x < game.row)
+	while (++game.tools.x < game.row_x)
 	{
 		game.tools.y = -1;
-		while (++game.tools.y < game.col)
+		while (++game.tools.y < game.col_y)
 		{
 			if (game_test[game.tools.x][game.tools.y] == 'P') 
 			{								
@@ -99,7 +105,7 @@ t_game	find_pos(t_game game, char **game_test)
 //duplico info
 //apply strdup to create mallocs per each pos
 /*
-while y != game.row
+while y != game.row_x
 	while line[x] != '\0'
 		game_test[y][x] = line[x];
 		x++;
@@ -109,40 +115,30 @@ while y != game.row
 
 */
 
-void	check_bounds(t_game game, char **game_test) //add **game_test to the message func to be able to free all info?
+void	check_bounds(t_game game, char **game_test)
 {
 	game.tools.y = 0;
 	game.tools.x = 0;
 	while (game_test[0][game.tools.y] != '\0' && game_test[0][game.tools.y] != '\n')
 	{
 		if (game_test[0][game.tools.y] != '1')
-		{
-			printf("%d line 120\n", game.tools.y);//Printf debug
-			message("ERROR - 1\nIncorrect boundaries\n", game);//debug error message modified;
-		}
+			message("ERROR\nIncorrect boundaries\n", game);
 		game.tools.y++;
+	}
+	while (game.tools.x < game.row_x)
+	{
+		if (game_test[game.tools.x][0] != '1' || game_test[game.tools.x][game.col_y -1] != '1')
+			message("ERROR\nIncorrect boundaries\n", game);
+		game.tools.x++;
 	}
 	game.tools.y = 0;
-	while (game_test[game.row][game.tools.y] != '\0')
+	while (game_test[game.row_x -1] && game.tools.y < game.col_y)
 	{
-		if (game_test[game.row][game.tools.y] != '1')
-		{
-			printf("%s 130\n", game_test[game.row]);//Printf debug
-			message("ERROR - 2\nIncorrect boundaries\n", game);//debug error message modified;
-		}
+
+		if (game_test[game.row_x -1][game.tools.y] != '1')
+			message("ERROR\nIncorrect boundaries\n", game);
 		game.tools.y++;
-	}
-	while (game.tools.x < game.row)
-	{
-		if (game_test[game.tools.x][0] != '1')
-			message("ERROR - A\nIncorrect boundaries\n", game);
-		printf("%d\n", game.col);
-		if (game_test[game.tools.x][game.col -1] != '1')
-		{
-			printf("%s 141\n", game_test[game.tools.x]);//Printf debug
-			message("ERROR - B\nIncorrect boundaries\n", game);//debug error message modified;
-		}
-		game.tools.x++;
+		
 	}
 }
 
@@ -158,39 +154,27 @@ t_game	check_map_playable(char *argv, t_game game)
 	if (fd < 0)
 		message("ERROR\nFile does not open\n", game);
 	i = 0;
-	ft_printf("GAME ROW %d\n", game.row);
-	game_test = malloc (game.row * sizeof(char *));
-	if (!game_test)
-		return (ft_printf("AAAAAAAA"), game);
+	game_test = malloc ((game.row_x + 1) * sizeof(char *));
 	line = get_next_line(fd);	
 	while (line != NULL)
 	{
 		game_test[i] = ft_strdup(line); //ft_substr(line, 0, ft_strlen_n(line));
-		ft_printf("----------%s", game_test[i]);
 		if (game_test[i] == NULL)
 		{
 			ft_freemalloc(game_test, i);
 			free (line);
-			ft_printf("AAAAAA");
 			return(game);
 		}
-		free(line);
+		//free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	ft_printf("----%d------\n", i);
 	game_test[i] = NULL;
-	ft_printf("+++++++++++%s", game_test[0]);
 	close (fd);
 	game.tools.x = 0;
-	while (game_test[game.tools.x])
-	{
-		ft_printf("%s", game_test[game.tools.x]);
-		game.tools.x++;
-	}
-	//check_bounds(game, game_test);
-	//game = count_obj(game, game_test);
-	//game = find_pos(game, game_test);
+	check_bounds(game, game_test);
+	game = count_obj(game, game_test);
+	game = find_pos(game, game_test);
 	/// check lines, find and save: coin, player & exit pos [x] [y]
 	return (game);
 }
@@ -205,17 +189,17 @@ t_game	check_map_size(int fd, t_game game)
 	line = get_next_line(fd);
 	if (line == 0)
 		message("ERROR\nError reading first line\n", game);	
-	game.col = ft_strlen_n(line);
+	game.col_y = ft_strlen_n(line);
 	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line == NULL)
 			return (game);
-		if (game.col != ((int)ft_strlen_n(line)))
+		if (game.col_y != ((int)ft_strlen_n(line)))
 			message("ERROR\nMap not correct\n", game);
 		else
-			game.row++;
+			game.row_x++;
 	}
 	return (game);
 }

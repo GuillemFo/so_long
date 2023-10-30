@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/30 10:50:48 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:43:13 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_count
 typedef struct s_game		//donde meto la poss de diferentes monedas?
 {
 	char		**map;
-	int			row;
-	int			col;
+	int			row_x;
+	int			col_y;
 	char		player;
 	char		coin;
 	char		exit;
