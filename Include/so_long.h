@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/25 19:28:54 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:50:48 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ t_game	check_args(int argc, char **argv, t_game game);
 void	message(char *msg, t_game game);
 t_game	ft_start_game(void);
 void	*ft_freemalloc(char **s2, int k);
+int	ft_strlen_n(const char *var);
 
 #endif

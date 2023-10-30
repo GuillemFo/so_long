@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/30 09:52:10 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:17:31 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_game	count_obj(t_game game, char **game_test)
 	while (++game.tools.y < game.col)
 	{
 		game.tools.x = -1;
-		while (++game.tools.x < (game.row -1))
+		while (++game.tools.x < game.row)
 		{	
 			if (game_test[game.tools.y][game.tools.x] == 'P') //y es columna -- x es fila -- 
 				game.counter.player++;	//el doble puntero guarda primero columna y luego fila?
@@ -73,7 +73,7 @@ t_game	find_pos(t_game game, char **game_test)
 	while (++game.tools.y < game.col)
 	{
 		game.tools.x = -1;
-		while (++game.tools.x < (game.row -1))
+		while (++game.tools.x < game.row)
 		{
 			if (game_test[game.tools.y][game.tools.x] == 'P') //Y es columna -- X es fila -- 
 			{								//el doble puntero guarda primero columna y luego fila?
@@ -113,52 +113,84 @@ void	check_bounds(t_game game, char **game_test) //add **game_test to the messag
 {
 	game.tools.x = 0;
 	game.tools.y = 0;
-	while (game.tools.x < (game.row -1))
+	while (game_test[0][game.tools.x] != '\0' && game_test[0][game.tools.x] != '\n')
 	{
-		if (game_test[game.tools.y][game.tools.x] != '1')
-			message("ERROR\nIncorrect boundaries'\n", game);
+		if (game_test[0][game.tools.x] != '1')
+		{
+			printf("%d line 120\n", game.tools.x);//Printf debug
+			message("ERROR - 1\nIncorrect boundaries\n", game);//debug error message modified;
+		}
 		game.tools.x++;
 	}
 	game.tools.x = 0;
-	while (game.tools.x < (game.row -1)) //faltaba algo, igual no es el (game.row -1)
+	while (game_test[game.col][game.tools.x] != '\0')
 	{
 		if (game_test[game.col][game.tools.x] != '1')
-			message("ERROR\nIncorrect boundaries'\n", game);
+		{
+			printf("%s 130\n", game_test[game.col]);//Printf debug
+			message("ERROR - 2\nIncorrect boundaries\n", game);//debug error message modified;
+		}
 		game.tools.x++;
 	}
 	while (game.tools.y < game.col)
 	{
 		if (game_test[game.tools.y][0] != '1')
-			message("A - ERROR\nIncorrect boundaries'\n", game);//debug error message modified;
-		if (game_test[game.tools.y][(game.row -1)] != '1')/////////// PETA AQUI NO SE PORQUE
-			message("B - ERROR\nIncorrect boundaries'\n", game);//debug error message modified;
+			message("ERROR - A\nIncorrect boundaries\n", game);
+		printf("%d\n", game.row);
+		if (game_test[game.tools.y][game.row -1] != '1')
+		{
+			printf("%s 141\n", game_test[game.tools.y]);//Printf debug
+			message("ERROR - B\nIncorrect boundaries\n", game);//debug error message modified;
+		}
 		game.tools.y++;
 	}
 }
 
 
-t_game	check_map_playable(int fd, t_game game)
+t_game	check_map_playable(char *argv, t_game game)
 {
 	int		i;
 	char	*line;
 	char	**game_test;
-
+	int		fd;
+	
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		message("ERROR\nFile does not open\n", game);
 	i = 0;
+	ft_printf("GAME COL %d\n", game.col);
 	game_test = malloc (game.col * sizeof(char *));
-	while ((line = get_next_line(fd)) != NULL)
+	if (!game_test)
+		return (ft_printf("AAAAAAAA"), game);
+	line = get_next_line(fd);	
+	while (line != NULL)
 	{
-		game_test[i] = ft_strdup(line);
+		game_test[i] = ft_strdup(line); //ft_substr(line, 0, ft_strlen_n(line));
+		ft_printf("----------%s", game_test[i]);
 		if (game_test[i] == NULL)
+		{
 			ft_freemalloc(game_test, i);
+			free (line);
+			ft_printf("AAAAAA");
+			return(game);
+		}
 		free(line);
+		line = get_next_line(fd);
 		i++;
 	}
+	ft_printf("----%d------\n", i);
 	game_test[i] = NULL;
-					//free(line);
-	printf("%s/n", game_test[0]);//Printf debug
-	check_bounds(game, game_test);
-	game = count_obj(game, game_test);
-	game = find_pos(game, game_test);
+	ft_printf("+++++++++++%s", game_test[0]);
+	close (fd);
+	game.tools.y = 0;
+	while (game_test[game.tools.y])
+	{
+		ft_printf("%s", game_test[game.tools.y]);
+		game.tools.y++;
+	}
+	//check_bounds(game, game_test);
+	//game = count_obj(game, game_test);
+	//game = find_pos(game, game_test);
 	/// check lines, find and save: coin, player & exit pos [x] [y]
 	return (game);
 }
@@ -167,20 +199,20 @@ t_game	check_map_size(int fd, t_game game)
 {
 	char	*line;
 
-	//game = ft_start_game();
+	game = ft_start_game();
 	// if (!game)
 	// 	message("ERROR\nMemory allocation error!\n", game);
 	line = get_next_line(fd);
 	if (line == 0)
-		message("ERROR\nError reading first line\n", game);
-	game.row = ft_strlen(line);
-	while (line)
+		message("ERROR\nError reading first line\n", game);	
+	game.row = ft_strlen_n(line);
+	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line == NULL)
 			return (game);
-		if (game.row != ((int)ft_strlen(line)))
+		if (game.row != ((int)ft_strlen_n(line)))
 			message("ERROR\nMap not correct\n", game);
 		else
 			game.col++;
@@ -201,9 +233,6 @@ t_game	check_args(int argc, char **argv, t_game game)
 		message("ERROR\nFile does not open\n", game);
 	game = check_map_size(fd, game);
 	close (fd);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		message("ERROR\nFile does not open\n", game);
-	game = check_map_playable(fd, game);
+	game = check_map_playable(argv[1], game);
 	return (game);
 }
