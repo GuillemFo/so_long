@@ -16,7 +16,7 @@ tmp:
 	mkdir -p $(PATH_OBJ)
 
 $(NAME): $(OBJ)
-	cc $(CFLAGS) $(OBJ) ./libft/libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	cc $(CFLAGS) $(OBJ) ./libft/libft.a -framework OpenGL -framework AppKit -o $(NAME)
 
 makelib: 
 	$(MAKE) -C ./libft 
@@ -26,7 +26,7 @@ makeminilibx:
 
 $(PATH_OBJ)%.o: %.c ./Include/libft.h ./Include/so_long.h Makefile
 	@mkdir -p $(dir $@)
-	cc $(CFLAGS) -Imlx -c $< -o $@
+	cc $(CFLAGS) -Imlx -g -c $< -o $@
 
 re: fclean all
 

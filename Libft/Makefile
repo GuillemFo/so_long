@@ -10,7 +10,6 @@ SRC	=	ft_isalnum.c\
 		ft_isalnum.c\
 		ft_isdigit.c\
 		ft_strlen.c\
-		ft_strchr.c\
 		ft_strrchr.c\
 		ft_toupper.c\
 		ft_memset.c\

@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 13:50:07 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/25 18:48:49 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:13:35 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char	*ft_readline(char *tmp, int fd)
 		free(tmp);
 		return (0);
 	}
-	while (rdbytes > 0 && ft_strchr(tmp, '\n') == 0)
+	while (rdbytes > 0 && ft_strchrplus(tmp, '\n') == 0)
 	{
 		rdbytes = read (fd, buff, BUFFER_SIZE);
 		if (rdbytes == -1)

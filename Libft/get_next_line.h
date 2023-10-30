@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:36:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/25 18:51:34 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:17:15 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "../Include/libft.h"
 
 char		*get_next_line(int fd);
-//int			ft_strchr(char *var, int c);
-//size_t		ft_strlen(char *var);
+int			ft_strchrplus(char *var, int c);
+size_t		ft_strlenplus(char *var);
 char		*ft_strjoinplus(char *s1, char *s2);
 
 #endif

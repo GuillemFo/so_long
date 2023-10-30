@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/25 19:03:26 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:52:10 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,13 @@ t_game	ft_start_game(void)
 
 t_game	count_obj(t_game game, char **game_test)
 {
-	game.tools.x = -1;
 	game.tools.y = -1;
-
 	while (++game.tools.y < game.col)
 	{
-		while (++game.tools.x < game.row)
-		{	if (game.counter.player != 1)
-				message ("ERROR\nMore than one player found\n", game);
-			if (game.counter.exit != 1)
-				message ("ERROR\nMore than one exit found\n", game);
-			else if (game_test[game.tools.y][game.tools.x] == 'P') //y es columna -- x es fila -- 
+		game.tools.x = -1;
+		while (++game.tools.x < (game.row -1))
+		{	
+			if (game_test[game.tools.y][game.tools.x] == 'P') //y es columna -- x es fila -- 
 				game.counter.player++;	//el doble puntero guarda primero columna y luego fila?
 			else if (game_test[game.tools.y][game.tools.x] == 'C')
 				game.counter.coin++;
@@ -62,6 +58,10 @@ t_game	count_obj(t_game game, char **game_test)
 				game.counter.exit++;
 		}
 	}
+	if (game.counter.player != 1)
+				message ("ERROR\nMore than one player found\n", game);
+	if (game.counter.exit != 1)
+				message ("ERROR\nMore than one exit found\n", game);
 	if (game.counter.coin < 1)
 		message ("ERROR\nNo coins found\n", game);
 	return (game);
@@ -69,12 +69,11 @@ t_game	count_obj(t_game game, char **game_test)
 
 t_game	find_pos(t_game game, char **game_test)
 {
-	game.tools.x = -1;
 	game.tools.y = -1;
-
 	while (++game.tools.y < game.col)
 	{
-		while (++game.tools.x < game.row)
+		game.tools.x = -1;
+		while (++game.tools.x < (game.row -1))
 		{
 			if (game_test[game.tools.y][game.tools.x] == 'P') //Y es columna -- X es fila -- 
 			{								//el doble puntero guarda primero columna y luego fila?
@@ -114,14 +113,14 @@ void	check_bounds(t_game game, char **game_test) //add **game_test to the messag
 {
 	game.tools.x = 0;
 	game.tools.y = 0;
-	while (game.tools.x < game.row)
+	while (game.tools.x < (game.row -1))
 	{
 		if (game_test[game.tools.y][game.tools.x] != '1')
 			message("ERROR\nIncorrect boundaries'\n", game);
 		game.tools.x++;
 	}
 	game.tools.x = 0;
-	while (game.tools.x < game.row)
+	while (game.tools.x < (game.row -1)) //faltaba algo, igual no es el (game.row -1)
 	{
 		if (game_test[game.col][game.tools.x] != '1')
 			message("ERROR\nIncorrect boundaries'\n", game);
@@ -129,8 +128,10 @@ void	check_bounds(t_game game, char **game_test) //add **game_test to the messag
 	}
 	while (game.tools.y < game.col)
 	{
-		if (game_test[game.tools.y][0] != '1' || game_test[game.tools.y][game.row] != '1')
-			message("ERROR\nIncorrect boundaries'\n", game);
+		if (game_test[game.tools.y][0] != '1')
+			message("A - ERROR\nIncorrect boundaries'\n", game);//debug error message modified;
+		if (game_test[game.tools.y][(game.row -1)] != '1')/////////// PETA AQUI NO SE PORQUE
+			message("B - ERROR\nIncorrect boundaries'\n", game);//debug error message modified;
 		game.tools.y++;
 	}
 }
@@ -152,7 +153,9 @@ t_game	check_map_playable(int fd, t_game game)
 		free(line);
 		i++;
 	}
+	game_test[i] = NULL;
 					//free(line);
+	printf("%s/n", game_test[0]);//Printf debug
 	check_bounds(game, game_test);
 	game = count_obj(game, game_test);
 	game = find_pos(game, game_test);
@@ -164,7 +167,7 @@ t_game	check_map_size(int fd, t_game game)
 {
 	char	*line;
 
-	game = ft_start_game();
+	//game = ft_start_game();
 	// if (!game)
 	// 	message("ERROR\nMemory allocation error!\n", game);
 	line = get_next_line(fd);
@@ -175,7 +178,9 @@ t_game	check_map_size(int fd, t_game game)
 	{
 		free(line);
 		line = get_next_line(fd);
-		if (ft_strlen(line) != game.row)
+		if (line == NULL)
+			return (game);
+		if (game.row != ((int)ft_strlen(line)))
 			message("ERROR\nMap not correct\n", game);
 		else
 			game.col++;
@@ -188,10 +193,8 @@ t_game	check_args(int argc, char **argv, t_game game)
 	int	fd;
 
 	if (argc != 2)
-		message(ft_printf("Error, invalid number of arguments\n"), game);
+		message("Error, invalid number of arguments\n", game);
 	if (check_ber(argv[1], ".ber") != 0)
-		message(ft_printf("Error, invalid number of arguments\n"), game);
-	if (ft_strlen(check_ber(argv[1], ".ber") != 4))
 		message("ERROR\nFile should be .ber type\n", game);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
