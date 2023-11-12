@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/12 03:40:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:17:33 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,8 @@ void	message(char *msg, t_game *game);
 void	ft_start_game(t_game *game);
 void	*ft_freemalloc(char **s2, int k);
 int	ft_strlen_n(const char *var);
+
+/*Tools*/
+void print_matrix(char **matrix, int rows, int cols);
 
 #endif

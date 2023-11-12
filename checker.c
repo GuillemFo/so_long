@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/12 12:32:39 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:26:59 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,14 @@ while y != game->row_x
 
 
 */
+int	confirm_all_connected(char **game_test, t_game *game)
+{
+
+	check_surround(game_test, game, pos ?? /*missing all coin pos*/); //the idea is to create a function that checks up down left right and confirms that any of that pos are = 'V'
+
+	return (0);
+}
+
 
 void	check_bounds(t_game *game, char **game_test)
 {
@@ -139,10 +147,9 @@ void	check_bounds(t_game *game, char **game_test)
 
 void	flood_fill_macro(char **game_test, t_game *game, int x, int y)
 {
-	if (x < 0 || y < 0 || x >= game->row_x || y >= game->col_y || (game_test[x][y] != '0' && game_test[x][y] != 'C'))
+	if (x < 0 || y < 0 || x >= game->row_x || y >= game->col_y || (game_test[x][y] != '0' && game_test[x][y] != 'P'))
 		return;
-	game_test[x][y] += 'V';
-	ft_printf("%c", game_test[x][y]);
+	game_test[x][y] = 'V';
 	flood_fill_macro(game_test, game, x + 1, y);
 	flood_fill_macro(game_test, game, x - 1, y);
 	flood_fill_macro(game_test, game, x, y + 1);
@@ -183,6 +190,9 @@ int	check_map_playable(char *argv, t_game *game)
 	find_pos(game, game->map);
 	game_test = game->map;
 	flood_fill_macro(game_test, game, game->playerpos.x, game->playerpos.y);
+	if (confirm_all_connected(game_test, game) != 0)
+		message("ERROR\nCan't reach all objects\n", game);
+ 	print_matrix(game_test, game->row_x, game->col_y);
 	return (0);
 }
 
