@@ -8,7 +8,7 @@ SRC = so_long.c checker.c utils.c
 OBJ = $(addprefix $(PATH_OBJ),$(SRC:.c=.o))
 	
 
-CFLAGS = -Wall -Wextra -Werror -I./Include
+CFLAGS = -Wall -Wextra -Werror -I./Include -g -fsanitize=address
 
 all: makelib makeminilibx tmp $(NAME)
 

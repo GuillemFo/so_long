@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/10/30 17:53:14 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/12 03:40:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ typedef struct s_game		//donde meto la poss de diferentes monedas?
 	t_count		counter;
 }				t_game;
 
-t_game	check_args(int argc, char **argv, t_game game);
-void	message(char *msg, t_game game);
-t_game	ft_start_game(void);
+int	check_args(int argc, char **argv, t_game *game);
+void	message(char *msg, t_game *game);
+void	ft_start_game(t_game *game);
 void	*ft_freemalloc(char **s2, int k);
 int	ft_strlen_n(const char *var);
 
