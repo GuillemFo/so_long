@@ -6,13 +6,13 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/12 03:36:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:18:51 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
-
+/*		RECORDAR: Matrix[Y][X]			*/
 void	message(char *msg, t_game *game)
 {
 	ft_printf("%s", msg);

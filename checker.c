@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/12 13:48:27 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:55:56 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ void	ft_start_game(t_game *game)
 
 void	count_obj(t_game *game, char **game_test)
 {
-	game->tools.x = -1;
-	while (++game->tools.x < game->row_x)
+	game->tools.y = -1;
+	while (++game->tools.y < game->col_y)
 	{
-		game->tools.y = -1;
-		while (++game->tools.y < game->col_y - 1)
+		game->tools.x = -1;
+		while (++game->tools.x < game->row_x - 1)
 		{	
-			if (game_test[game->tools.x][game->tools.y] != '0' 
-				&& game_test[game->tools.x][game->tools.y] != '1')
+			if (game_test[game->tools.y][game->tools.x] != '0' 
+				&& game_test[game->tools.y][game->tools.x] != '1')
 				{
-					if (game_test[game->tools.x][game->tools.y] == 'P')
+					if (game_test[game->tools.y][game->tools.x] == 'P')
 						game->counter.player++;
-					else if (game_test[game->tools.x][game->tools.y] == 'C')
+					else if (game_test[game->tools.y][game->tools.x] == 'C')
 						game->counter.coin++;
-					else if (game_test[game->tools.x][game->tools.y] == 'E')
+					else if (game_test[game->tools.y][game->tools.x] == 'E')
 						game->counter.exit++;
 					else
 						message ("ERROR\nWrong imput\n", game);
@@ -71,23 +71,23 @@ void	count_obj(t_game *game, char **game_test)
 
 void	find_pos(t_game *game, char **game_test)
 {
-	game->tools.x = -1;
+	game->tools.y = -1;
 	while (++game->tools.x < game->row_x)
 	{
-		game->tools.y = -1;
-		while (++game->tools.y < game->col_y)
+		game->tools.x = -1;
+		while (++game->tools.x < game->row_x)
 		{
-			if (game_test[game->tools.x][game->tools.y] == 'P') 
+			if (game_test[game->tools.y][game->tools.x] == 'P') 
 			{								
 				game->playerpos.y = game->tools.y;
 				game->playerpos.x = game->tools.x;
 			}
-			else if (game_test[game->tools.x][game->tools.y] == 'C')
-			{
-				game->coinpos.y = game->tools.y;
-				game->coinpos.x = game->tools.x;
-			}
-			else if (game_test[game->tools.x][game->tools.y] == 'E')
+			// else if (game_test[game->tools.y][game->tools.x] == 'C')
+			// {
+			// 	game->coinpos.y = game->tools.y;
+			// 	game->coinpos.x = game->tools.x;
+			// }
+			else if (game_test[game->tools.y][game->tools.x] == 'E')
 			{
 				game->exitpos.y = game->tools.y;
 				game->exitpos.x = game->tools.x;
@@ -109,51 +109,46 @@ while y != game->row_x
 
 
 */
-int	confirm_all_connected(char **game_test, t_game *game)
-{
-
-	check_surround(game_test, game, pos ?? /*missing all coin pos*/); //the idea is to create a function that checks up down left right and confirms that any of that pos are = 'V'
-
-	return (0);
-}
 
 
 void	check_bounds(t_game *game, char **game_test)
 {
 	game->tools.y = 0;
 	game->tools.x = 0;
-	while (game_test[0][game->tools.y] != '\0' && game_test[0][game->tools.y] != '\n')
+	while (game_test[0][game->tools.x] != '\0' && game_test[0][game->tools.x] != '\n')
 	{
-		if (game_test[0][game->tools.y] != '1')
-			message("ERROR\nIncorrect boundaries\n", game);
-		game->tools.y++;
-	}
-	while (game->tools.x < game->row_x)
-	{
-		if (game_test[game->tools.x][0] != '1' || game_test[game->tools.x][game->col_y -1] != '1')
+		if (game_test[0][game->tools.x] != '1')
 			message("ERROR\nIncorrect boundaries\n", game);
 		game->tools.x++;
 	}
-	game->tools.y = 0;
-	while (game_test[game->row_x ] && game->tools.y < game->col_y)
+	while (game->tools.y < game->col_y)
 	{
-
-		if (game_test[game->row_x ][game->tools.y] != '1')
+		if (game_test[game->tools.y][0] != '1' || game_test[game->tools.y][game->row_x -1] != '1')
 			message("ERROR\nIncorrect boundaries\n", game);
 		game->tools.y++;
+	}
+	game->tools.x = 0;
+	while (game_test[game->col_y][game->tools.x] != '\n') //ERROR 15/11/2023 11.55am
+	{
+
+		if (game_test[game->col_y][game->tools.x] != '1')
+			message("ERROR\nIncorrect boundaries\n", game);
+		game->tools.x++;
 		
 	}
 }
 
-void	flood_fill_macro(char **game_test, t_game *game, int x, int y)
+void	flood_fill_macro(char **game_test, t_game *game, int x, int y, int *all_found)
 {
-	if (x < 0 || y < 0 || x >= game->row_x || y >= game->col_y || (game_test[x][y] != '0' && game_test[x][y] != 'P'))
+	if (x < 0 || y < 0 || x >= game->row_x || y >= game->col_y || (game_test[y][x] == '1' || all_found == 0))
 		return;
-	game_test[x][y] = 'V';
-	flood_fill_macro(game_test, game, x + 1, y);
-	flood_fill_macro(game_test, game, x - 1, y);
-	flood_fill_macro(game_test, game, x, y + 1);
-	flood_fill_macro(game_test, game, x, y - 1);
+	if (game_test[y][x] == 'C' || game_test[y][x] == 'E')
+		all_found--;
+	game_test[y][x] = 'V';
+	flood_fill_macro(game_test, game, y + 1, x, all_found);
+	flood_fill_macro(game_test, game, y - 1, x, all_found);
+	flood_fill_macro(game_test, game, y, x + 1, all_found);
+	flood_fill_macro(game_test, game, y, x - 1, all_found);
 }
 
 int	check_map_playable(char *argv, t_game *game)
@@ -162,12 +157,13 @@ int	check_map_playable(char *argv, t_game *game)
 	char	*line;
 	char	**game_test;
 	int		fd;
+	int 	all_found;
 	
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		message("ERROR\nFile does not open\n", game);
 	i = 0;
-	game->map = malloc((game->row_x + 1) * sizeof(char *));
+	game->map = malloc((game->col_y + 1) * sizeof(char *));
 	line = get_next_line(fd);	
 	while (line != NULL)
 	{
@@ -184,15 +180,16 @@ int	check_map_playable(char *argv, t_game *game)
 	}
 	game->map[i] = NULL;
 	close (fd);
-	game->tools.x = 0;
+	game->tools.y = 0;
 	check_bounds(game, game->map);
 	count_obj(game, game->map);
 	find_pos(game, game->map);
+	all_found = game->counter.coin + 1;
 	game_test = game->map;
-	flood_fill_macro(game_test, game, game->playerpos.x, game->playerpos.y);
-	if (confirm_all_connected(game_test, game) != 0)
-		message("ERROR\nCan't reach all objects\n", game);
- 	print_matrix(game_test, game->row_x, game->col_y);
+	flood_fill_macro(game_test, game, game->playerpos.y, game->playerpos.x, &all_found);
+	if (all_found != 0)
+		message("ERROR\nObjectives not reachable\n", game);
+ 	print_matrix(game_test, game->col_y, game->row_x);
 	return (0);
 }
 
@@ -205,14 +202,14 @@ int	check_map_size(int fd, t_game *game)
 	line = get_next_line(fd);
 	if (line == 0)
 		message("ERROR\nError reading first line\n", game);	
-	game->col_y = ft_strlen_n(line);
+	game->row_x = ft_strlen_n(line);
 	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
-		if (line && (game->col_y != ((int)ft_strlen_n(line))))
+		if (line && (game->row_x != ((int)ft_strlen_n(line))))
 			return (1);
-		game->row_x++;
+		game->col_y++;
 	}
 	return (0);
 }
