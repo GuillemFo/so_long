@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/15 13:52:58 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:57:16 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	count_obj(t_game *game, char **game_test)
 void	find_pos(t_game *game, char **game_test)
 {
 	game->tools.y = -1;
-	while (++game->tools.x < game->col_x)
+	while (++game->tools.y < game->row_y)
 	{
 		game->tools.x = -1;
 		while (++game->tools.x < game->col_x)
@@ -90,11 +90,6 @@ void	find_pos(t_game *game, char **game_test)
 				game->playerpos.y = game->tools.y;
 				game->playerpos.x = game->tools.x;
 			}
-			// else if (game_test[game->tools.y][game->tools.x] == 'C')
-			// {
-			// 	game->coinpos.y = game->tools.y;
-			// 	game->coinpos.x = game->tools.x;
-			// }
 			else if (game_test[game->tools.y][game->tools.x] == 'E')
 			{
 				game->exitpos.y = game->tools.y;
@@ -121,27 +116,27 @@ void	check_bounds(t_game *game, char **game_test)
 		game->tools.y++;
 	}
 	game->tools.x = 0;
-	while (game_test[game->row_y][game->tools.x] != '\0' || game_test[game->row_y][game->tools.x] != '\n') //ERROR 15/11/2023 11.55am
+	while (game_test[game->row_y -1 ][game->tools.x] != '\0' && game_test[game->row_y -1][game->tools.x] != '\n')
 	{
 
-		if (game_test[game->row_y][game->tools.x] != '1')
+		if (game_test[game->row_y -1][game->tools.x] != '1')
 			message("ERROR\nIncorrect boundaries. Last line has issues\n", game);
 		game->tools.x++;
 		
 	}
 }
 
-void	flood_fill_macro(char **game_test, t_game *game, int x, int y, int *all_found)
+void	flood_fill_macro(char **game_test, t_game *game, int y, int x, int *all_found)
 {
-	if (x < 0 || y < 0 || x >= game->col_x || y >= game->row_y || (game_test[y][x] == '1' || all_found == 0))
+	if (x < 0 || y < 0 || x >= (game->col_x -1) || y >= (game->row_y -1) || game_test[y][x] == '1' || game_test[y][x] == 'V' || *all_found == 0) //player poss incorrect 17/11/23 15.27
 		return;
 	if (game_test[y][x] == 'C' || game_test[y][x] == 'E')
-		all_found--;
+		*all_found -= 1;
 	game_test[y][x] = 'V';
-	flood_fill_macro(game_test, game, y + 1, x, all_found);
-	flood_fill_macro(game_test, game, y - 1, x, all_found);
 	flood_fill_macro(game_test, game, y, x + 1, all_found);
 	flood_fill_macro(game_test, game, y, x - 1, all_found);
+	flood_fill_macro(game_test, game, y + 1, x, all_found);
+	flood_fill_macro(game_test, game, y - 1, x, all_found);
 }
 
 int	check_map_playable(char *argv, t_game *game)
@@ -180,6 +175,7 @@ int	check_map_playable(char *argv, t_game *game)
 	all_found = game->counter.coin + 1;
 	game_test = game->map;
 	flood_fill_macro(game_test, game, game->playerpos.y, game->playerpos.x, &all_found);
+	//free game_test
 	if (all_found != 0)
 		message("ERROR\nObjectives not reachable\n", game);
  	print_matrix(game_test, game->row_y, game->col_x);
@@ -190,8 +186,6 @@ int	check_map_size(int fd, t_game *game)
 {
 	char	*line;
 
-	// if (!game)
-	// 	message("ERROR\nMemory allocation error!\n", game);
 	line = get_next_line(fd);
 	if (line == 0)
 		message("ERROR\nError reading first line\n", game);	

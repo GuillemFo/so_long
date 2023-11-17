@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/15 10:18:51 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/17 19:16:53 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,24 @@ void	message(char *msg, t_game *game)
 {
 	ft_printf("%s", msg);
 	(void)game->tools;
-	//free(game->map);
-	//falta free de todo game
+	//free_map(game->map);
+	//mlx_destroy_window(game->mlx, );
 	exit(0);
 }
 
 int	main(int argc, char **argv)
 {
-	//void	*mlx;
+	
+	void	*img;
+	void	*mlx_win;
 	t_game	game;
 
-	//mlx = mlx_init();
 	ft_start_game(&game);
 	check_args(argc, argv, &game);
+	game.mlx = mlx_init();
+	img = mlx_new_image(game.mlx, 1920, 1080);
+	mlx_win = mlx_new_window(game.mlx, 1920, 1080, "so_long gforns-s");
+	mlx_loop(game.mlx);
 	
 	
 	return (0);
