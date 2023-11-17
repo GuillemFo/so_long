@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/17 18:47:05 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:09:53 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include "../Libft/get_next_line.h"
 # include "libft.h"
 # include "../MiniLibX/mlx.h"
+
+typedef	struct s_data
+{
+	void	*mlx;
+	void	*img;
+	void	*mlx_win;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
+
 
 typedef struct s_point
 {
@@ -34,7 +46,6 @@ typedef struct s_count
 typedef struct s_game		//donde meto la poss de diferentes monedas?
 {
 	char		**map;
-	void		*mlx;
 	int			col_x;
 	int			row_y;
 	char		player;

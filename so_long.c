@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/17 19:16:53 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/17 21:24:27 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,32 @@ void	message(char *msg, t_game *game)
 	ft_printf("%s", msg);
 	(void)game->tools;
 	//free_map(game->map);
-	//mlx_destroy_window(game->mlx, );
+	//free(data.mlx);
+	//mlx_destroy_window(data.mlx, );
 	exit(0);
 }
 
 int	main(int argc, char **argv)
 {
-	
-	void	*img;
-	void	*mlx_win;
 	t_game	game;
-
+	t_data	mlx;
+	
 	ft_start_game(&game);
 	check_args(argc, argv, &game);
-	game.mlx = mlx_init();
-	img = mlx_new_image(game.mlx, 1920, 1080);
-	mlx_win = mlx_new_window(game.mlx, 1920, 1080, "so_long gforns-s");
-	mlx_loop(game.mlx);
+	
+	mlx.mlx = mlx_init();
+	if (mlx.mlx == NULL)
+		return (1);
+	mlx.img = mlx_new_image(mlx.mlx, 1920, 1080);
+	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
+	mlx.mlx_win = mlx_new_window(mlx.mlx, 1920, 1080, "so_long gforns-s");
+	if (mlx.mlx_win == NULL)
+	{
+		mlx_destroy_();
+		free(mlx.mlx);
+		return(1);
+	}
+	mlx_loop(mlx.mlx);
 	
 	
 	return (0);
