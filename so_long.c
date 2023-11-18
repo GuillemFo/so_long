@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/18 15:43:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:43:07 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	start_game(t_game *game)
 	game->mlx = mlx_init();
 	//if (game->mlx == NULL)
 		//return (1);
-	game->mlx_win = mlx_new_window(game->mlx, 500, 500, "so_long gforns-s");
+	game->mlx_win = mlx_new_window(game->mlx, game->col_x * 32, game->row_y * 32, "so_long gforns-s");
 	// if (game->mlx_win == NULL)
 	// {
 	// 	//mlx_destroy_();

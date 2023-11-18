@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/18 15:41:44 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:00:01 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int	check_map_playable(char *argv, t_game *game)
 	char	**game_test;
 	int 	all_found;
 	game->map = load_map_file(argv, game);
-	game_test = load_map_file(argv, game);
+	game_test = load_map_file(argv, game); // instead of calling load map, malloc x number of y +1 and strdup x each x;
 	game->tools.y = 0;
 	check_bounds(game, game->map);
 	count_obj(game, game->map);
