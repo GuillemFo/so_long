@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/17 21:24:27 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/18 04:18:57 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,60 @@ void	message(char *msg, t_game *game)
 	exit(0);
 }
 
+static void	image_holder(t_game *game)
+{
+	game->img[0].data = (int *)mlx_get_data_addr(game->img[0].image_ptr,
+			&game->img[0].bpp, &game->img[0].size_l, &game->img[0].endian);
+	game->img[1].data = (int *)mlx_get_data_addr(game->img[1].image_ptr,
+			&game->img[1].bpp, &game->img[1].size_l, &game->img[1].endian);
+	game->img[2].data = (int *)mlx_get_data_addr(game->img[2].image_ptr,
+			&game->img[2].bpp, &game->img[2].size_l, &game->img[2].endian);
+	game->img[3].data = (int *)mlx_get_data_addr(game->img[3].image_ptr,
+			&game->img[3].bpp, &game->img[3].size_l, &game->img[3].endian);
+	game->img[4].data = (int *)mlx_get_data_addr(game->img[4].image_ptr,
+			&game->img[4].bpp, &game->img[4].size_l, &game->img[4].endian);
+	game->img[5].data = (int *)mlx_get_data_addr(game->img[5].image_ptr,
+			&game->img[5].bpp, &game->img[5].size_l, &game->img[5].endian);
+	game->img[6].data = (int *)mlx_get_data_addr(game->img[6].image_ptr,
+			&game->img[6].bpp, &game->img[6].size_l, &game->img[6].endian);
+}
+
+void	load_image(t_game *game)
+{
+	game->img = malloc (sizeof(t_data) * (7 + 1));
+	game->img[0].image_ptr = mlx_xpm_file_to_image(game->mlx, "images/image0.xpm", 64, 64);
+	game->img[1].image_ptr = mlx_xpm_file_to_image(game->mlx, "images/image1.xpm", 64, 64);
+	game->img[2].image_ptr = mlx_xpm_file_to_image(game->mlx, "images/image2.xpm", 64, 64);
+	game->img[3].image_ptr = mlx_xpm_file_to_image(game->mlx, "images/image3.xpm", 64, 64);
+	game->img[4].image_ptr = mlx_xpm_file_to_image(game->mlx, "images/image4.xpm", 64, 64);
+	game->img[5].image_ptr = mlx_xpm_file_to_image(game->mlx, "images/image5.xpm", 64, 64);
+	game->img[6].image_ptr = mlx_xpm_file_to_image(game->mlx, "images/image6.xpm", 64, 64);
+}
+
+void	start_game(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+		return (1);
+	game->mlx_win = mlx_new_window(game->mlx, game->col_x *64, game->row_y * 64, "so_long gforns-s");
+	if (game->mlx_win == NULL)
+	{
+		//mlx_destroy_();
+		free(game->mlx);
+		return(1);
+	}
+	game->nw_img = mlx_new_image(game->mlx, 1920, 1080);
+	mlx_loop(game->mlx);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	t_data	mlx;
 	
 	ft_start_game(&game);
 	check_args(argc, argv, &game);
 	
-	mlx.mlx = mlx_init();
-	if (mlx.mlx == NULL)
-		return (1);
-	mlx.img = mlx_new_image(mlx.mlx, 1920, 1080);
-	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
-	mlx.mlx_win = mlx_new_window(mlx.mlx, 1920, 1080, "so_long gforns-s");
-	if (mlx.mlx_win == NULL)
-	{
-		mlx_destroy_();
-		free(mlx.mlx);
-		return(1);
-	}
-	mlx_loop(mlx.mlx);
+
 	
 	
 	return (0);
