@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/18 14:18:22 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:43:33 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	load_image(t_game *game)
 	//game->img[0].endian = 1;
 	//game->img[0].size_l = 1;
 	game->img[0].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/path.xpm", &game->img[0].endian, &game->img[0].size_l);
-	game->img[1].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/wall.xpm", &game->img[1].endian, &game->img[1].size_l);
-	game->img[2].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/coin.xpm", &game->img[2].endian, &game->img[2].size_l);
+	game->img[1].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/wall.xpm", &game->img[0].endian, &game->img[0].size_l);
+	game->img[2].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/coin.xpm", &game->img[0].endian, &game->img[0].size_l);
 	game->img[3].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/door.xpm", &game->img[0].endian, &game->img[0].size_l);
 	game->img[4].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/player.xpm", &game->img[0].endian, &game->img[0].size_l);
 	game->img[5].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/player_left.xpm", &game->img[0].endian, &game->img[0].size_l);
@@ -50,7 +50,6 @@ void	start_game(t_game *game)
 	// }
 	load_image(game);
 	put_images(*game);
-	//game->nw_img = mlx_new_image(game->mlx, 1920, 1080);
 	mlx_loop(game->mlx);
 }
 

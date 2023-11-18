@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/18 14:37:56 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/18 15:41:44 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,46 +139,49 @@ void	flood_fill_macro(char **game_test, t_game *game, int y, int x, int *all_fou
 	flood_fill_macro(game_test, game, y - 1, x, all_found);
 }
 
-int	check_map_playable(char *argv, t_game *game)
+char **load_map_file(char *argv, t_game *game)
 {
 	int		i;
-	char	*line;
-	char	**game_test;
 	int		fd;
-	int 	all_found;
-	
+	char	*line;
+	char 	**map;
+
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		message("ERROR\nFile does not open\n", game);
 	i = 0;
-	game->map = malloc((game->row_y + 1) * sizeof(char *));
+	map = malloc((game->row_y + 1) * sizeof(char *));
 	line = get_next_line(fd);	
 	while (line != NULL)
 	{
-		game->map[i] = ft_strdup(line); //ft_substr(line, 0, ft_strlen_n(line));
-		if (game->map[i] == NULL)
-		{
-			ft_freemalloc(game->map, i);
-			free (line);
-			return(1);
-		}
+		map[i] = ft_strdup(line);
+		if (map[i] == NULL)
+			message("ERROR\nCouldn't load the file correctly\n", game);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
-	game->map[i] = NULL;
+	map[i] = NULL;
 	close (fd);
+	return (map);
+}
+
+int	check_map_playable(char *argv, t_game *game)
+{
+	char	**game_test;
+	int 	all_found;
+	game->map = load_map_file(argv, game);
+	game_test = load_map_file(argv, game);
 	game->tools.y = 0;
 	check_bounds(game, game->map);
 	count_obj(game, game->map);
 	find_pos(game, game->map);
-	all_found = game->counter.coin + 1;
-	game_test = game->map;
+	all_found = game->counter.coin + game->counter.exit;
 	flood_fill_macro(game_test, game, game->playerpos.y, game->playerpos.x, &all_found);
-	//free game_test
+	//ft_freemalloc(game_test, game->row_y);
 	if (all_found != 0)
 		message("ERROR\nObjectives not reachable\n", game);
- 	print_matrix(game_test, game->row_y, game->col_x);
+ 	print_matrix(game->map, game->row_y, game->col_x);
 	return (0);
 }
 
