@@ -3,7 +3,7 @@ NAME = so_long
 
 PATH_OBJ = tmp/
 
-SRC = so_long.c checker.c utils.c tools.c
+SRC = so_long.c checker.c utils.c tools.c assembly_map.c
 #Remember to delete tools.c !!!
 
 OBJ = $(addprefix $(PATH_OBJ),$(SRC:.c=.o))

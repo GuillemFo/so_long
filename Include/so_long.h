@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/18 02:10:16 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/18 14:13:13 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 
 typedef	struct s_data
 {
-	void	*image_ptr;
-	int		*data;
+	void	*img_ptr;
 	int		size_l;
-	int		bpp;
 	int		endian;
 }			t_data;
 
@@ -57,7 +55,7 @@ typedef struct s_game		//donde meto la poss de diferentes monedas?
 	t_point		exitpos;
 	t_point		tools;
 	t_count		counter;
-	t_data		*img;
+	t_data		img[20];
 }				t_game;
 
 int	check_args(int argc, char **argv, t_game *game);
@@ -66,6 +64,9 @@ void	ft_start_game(t_game *game);
 void	*ft_freemalloc(char **s2, int k);
 int	ft_strlen_n(const char *var);
 
+/*IMAGES*/
+
+void	put_images(t_game game);
 /*Tools*/
 void print_matrix(char **matrix, int rows, int cols);
 

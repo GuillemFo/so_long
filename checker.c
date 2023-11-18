@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/17 18:57:16 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/18 14:37:56 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ int	check_map_playable(char *argv, t_game *game)
  	print_matrix(game_test, game->row_y, game->col_x);
 	return (0);
 }
+
+
 
 int	check_map_size(int fd, t_game *game)
 {
