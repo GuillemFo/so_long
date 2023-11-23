@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/18 16:43:07 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:25:44 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	message(char *msg, t_game *game)
 	exit(0);
 }
 
-void	load_image(t_game *game)
+void	load_image(t_game *game) //verify they exist and have permissions.
 {
 	//game->img[0].endian = 1;
 	//game->img[0].size_l = 1;
@@ -36,20 +36,34 @@ void	load_image(t_game *game)
 	game->img[6].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/door_open.xpm", &game->img[0].endian, &game->img[0].size_l);
 }
 
+int	moves_test(int keycode, t_game *game)
+{
+	if (keycode == A_KEY)
+		printf("Hello from key_hook!\n");
+	if (keycode == ESC_KEY)
+	{
+		free(game->mlx);
+		mlx_destroy_window(game->mlx, game->mlx_win);
+
+	}
+	return (0);
+}
+
 void	start_game(t_game *game)
 {
 	game->mlx = mlx_init();
-	//if (game->mlx == NULL)
-		//return (1);
+	// if (game->mlx == NULL)
+	// 	return (1);
 	game->mlx_win = mlx_new_window(game->mlx, game->col_x * 32, game->row_y * 32, "so_long gforns-s");
 	// if (game->mlx_win == NULL)
 	// {
-	// 	//mlx_destroy_();
+	// 	mlx_destroy_();
 	// 	free(game->mlx);
-	// 	//return(1);
+	// 	return(1);
 	// }
 	load_image(game);
 	put_images(*game);
+	mlx_key_hook(game->mlx_win, moves_test, &game);
 	mlx_loop(game->mlx);
 }
 
@@ -57,7 +71,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 	
-	ft_start_game(&game);
+	ft_start_game(&game); //leaks from the minilibx;
 	check_args(argc, argv, &game);
 	start_game(&game);	
 	

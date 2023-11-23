@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/18 16:00:01 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:11:28 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ int	check_map_playable(char *argv, t_game *game)
 	find_pos(game, game->map);
 	all_found = game->counter.coin + game->counter.exit;
 	flood_fill_macro(game_test, game, game->playerpos.y, game->playerpos.x, &all_found);
-	//ft_freemalloc(game_test, game->row_y);
+	ft_freemalloc(game_test, game->row_y);
 	if (all_found != 0)
 		message("ERROR\nObjectives not reachable\n", game);
  	print_matrix(game->map, game->row_y, game->col_x);
