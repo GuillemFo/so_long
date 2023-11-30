@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/30 09:43:31 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:33:56 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_game		//donde meto la poss de diferentes monedas?
 	char		coin;
 	char		exit;
 	t_point		playerpos;
+	t_point		next_pos;
 	t_point		coinpos;
 	t_point		exitpos;
 	t_point		tools;
@@ -104,7 +105,7 @@ void	message(char *msg, t_game *game);
 void	ft_start_game(t_game *game);
 void	*ft_freemalloc(char **s2, int k);
 int	ft_strlen_n(const char *var);
-void	apply_move(t_game *game, int x, int y, int dir);
+void	apply_move(t_game *game, int dir);
 
 /*IMAGES*/
 
