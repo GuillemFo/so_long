@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/30 13:15:56 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:32:50 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	start_game(t_game *game)
 	// }
 	load_image(game);
 	put_images(*game);
-	mlx_hook(game->mlx_win, KEYDOWN, 0, moves, &game);
+	mlx_hook(game->mlx_win, KEYDOWN, 0, moves, game);
 	mlx_loop(game->mlx);
 }
 
