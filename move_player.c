@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:54:44 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/30 13:07:09 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:19:56 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	print_new_player(t_game *game, int dir)
 
 }
 
-void	apply_move(t_game *game, int dir) 
+int	apply_move(t_game *game, int dir) 
 {	
-	precal_next_mv(&game, dir);			// REMEMBER MOVE PLAYER ON ACTUAL MAP STRUCT
+	precal_next_mv(game, dir);			// REMEMBER MOVE PLAYER ON ACTUAL MAP STRUCT
 										// CHECK IF ACTUAL POSS IS DOOR COORDS SO WHEN I DO NEXT MOVE, PRINT BACK DOOR.
 
 	if (game->map[game->next_pos.y][game->next_pos.x] == '0') // path
@@ -102,6 +102,7 @@ void	apply_move(t_game *game, int dir)
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->img[4].img_ptr, game->playerpos.x * 32, game->playerpos.y * 32);
 		// print path on last poss
 	}
+	return (1);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/23 15:45:04 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:15:56 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ void	load_image(t_game *game) //verify they exist and have permissions.
 	game->img[6].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/door_open.xpm", &game->img[0].endian, &game->img[0].size_l);
 }
 
-int	moves_test(int keycode, void *param)
-{
-	t_game *game;
-	game = (t_game *)param;
-	if (keycode == A_KEY)
-		printf("Hello from key_hook!\n");
-	if (keycode == ESC_KEY)
-	{
-		mlx_destroy_window(game->mlx, game->mlx_win);
-		exit(0);
-	}
-	return (0);
-}
+// int	moves_test(int keycode, void *param)
+// {
+// 	t_game *game;
+// 	game = (t_game *)param;
+// 	if (keycode == A_KEY)
+// 		printf("Hello from key_hook!\n");
+// 	if (keycode == ESC_KEY)
+// 	{
+// 		mlx_destroy_window(game->mlx, game->mlx_win);
+// 		exit(0);
+// 	}
+// 	return (0);
+// }
 
 void	start_game(t_game *game)
 {
@@ -64,7 +64,7 @@ void	start_game(t_game *game)
 	// }
 	load_image(game);
 	put_images(*game);
-	mlx_hook(game->mlx_win, KEYDOWN, 0, moves_test, &game);
+	mlx_hook(game->mlx_win, KEYDOWN, 0, moves, &game);
 	mlx_loop(game->mlx);
 }
 
