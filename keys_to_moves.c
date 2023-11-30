@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:14:10 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/30 13:15:39 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:47:11 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	check_move(t_game *game, int dir)
 {
+	printf("mv\n");
 	if (dir == 0)
 	{
 		if (game->map[game->playerpos.y + 1][game->playerpos.x] == '1')
