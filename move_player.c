@@ -6,13 +6,13 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:54:44 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/23 13:33:50 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 09:53:17 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
-void	put_new_player(t_game *game, int x, int y, int dir)
+void	print_new_player(t_game *game, int x, int y, int dir)
 {
 	if (dir == 0) //move up;
 	{
@@ -37,15 +37,16 @@ void	put_new_player(t_game *game, int x, int y, int dir)
 
 }
 
-void	apply_move(t_game *game, int x, int y, int dir)
+void	apply_move(t_game *game, int x, int y, int dir) // REMEMBER MOVE PLAYER ON ACTUAL MAP STRUCT
 {	
+	
 	if (game->map[y][x] == '0') // path
 	{
-		put_new_player(game, x, y, dir);
+		print_new_player(game, x, y, dir);
 	}
 	else if (game->map[y][x] == 'C') // coin
 	{
-		put_new_player(game, x, y, dir);
+		print_new_player(game, x, y, dir);
 		// number of coins modified??
 	}
 	else if (game->map[y][x] == 'E') // door
