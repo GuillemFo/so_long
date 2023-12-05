@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 13:58:39 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:38:07 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,15 @@ int		apply_move(t_game *game, int dir);
 int	moves(int keycode, void *param);
 int	close_window(void *param);
 int	esc_window(int keycode, void *param);
+int	if_prev_door(t_game *game);
+t_game	*precal_next_mv(t_game *game, int dir);
+t_game	*write_move_on_map(t_game *game, int dir);
+int	check_args(int argc, char **argv, t_game *game);
+void	check_bounds(t_game *game, char **game_test);
+void	find_pos(t_game *game, char **game_test);
+void	count_obj(t_game *game, char **game_test);
+void	ft_start_game(t_game *game);
+int	check_ber(char *argv, char *text);
 
 /*IMAGES*/
 

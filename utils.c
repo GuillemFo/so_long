@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:54:53 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 13:59:27 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:55:47 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,21 @@ int	ft_strlen_n(const char *var)
 		count++;
 	return (count);
 }
+
 int	close_window(void *param)
 {
-	t_game *game;
-	
+	t_game	*game;
+
 	game = (t_game *)param;
 	mlx_destroy_window(game->mlx, game->mlx_win);
 	exit(0);
 	return (1);
 }
+
 int	esc_window(int keycode, void *param)
-{	
-	t_game *game;
-	
+{
+	t_game	*game;
+
 	game = (t_game *)param;
 	if (keycode == ESC_KEY)
 	{

@@ -6,154 +6,41 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/12/05 10:45:28 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:53:36 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
-int	check_ber(char *argv, char *text)
+void	flood_fill_macro(char **game_test, t_game *game, t_point ppos,
+		int *all_found)
 {
-	int	tmp;
-
-	tmp = ft_strlen(argv);
-	if (ft_strncmp(&argv[tmp -4], text, 4) != 0)
-		return (-1);
-	return (0);
-}
-
-void	ft_start_game(t_game *game)
-{
-	game->row_y = 0;
-	game->col_x = 0;
-	game->ppos.y = 0;
-	game->ppos.x = 0;
-	game->epos.y = 0;
-	game->epos.x = 0;
-	game->counter.player = 0;
-	game->counter.coin = 0;
-	game->counter.exit = 0;
-	game->counter.moves = 0;
-	game->player = 'P';
-	game->coin = 'C';
-	game->exit = 'E';
-}
-
-void	count_obj(t_game *game, char **game_test)
-{
-	game->tools.y = -1;
-	while (++game->tools.y < game->row_y)
-	{
-		game->tools.x = -1;
-		while (++game->tools.x < game->col_x - 1)
-		{	
-			if (game_test[game->tools.y][game->tools.x] != '0' 
-				&& game_test[game->tools.y][game->tools.x] != '1')
-				{
-					if (game_test[game->tools.y][game->tools.x] == 'P')
-					{
-						game->counter.player++;
-						if (game->counter.player != 1)
-							message ("ERROR\nToo many players\n", game);
-					}
-					else if (game_test[game->tools.y][game->tools.x] == 'C')
-						game->counter.coin++;
-					else if (game_test[game->tools.y][game->tools.x] == 'E')
-					{
-						game->counter.exit++;
-						if (game->counter.exit != 1)
-							message ("ERROR\nToo many exits\n", game);
-					}
-					else
-						message ("ERROR\nWrong imput\n", game);
-				}
-		}
-	}
-	if (game->counter.player != 1)
-				message ("ERROR\nNo player found\n", game);
-	if (game->counter.exit != 1)
-				message ("ERROR\nNo exit found\n", game);
-	if (game->counter.coin < 1)
-		message ("ERROR\nNo coins found\n", game);
-}
-
-void	find_pos(t_game *game, char **game_test)
-{
-	game->tools.y = -1;
-	while (++game->tools.y < game->row_y)
-	{
-		game->tools.x = -1;
-		while (++game->tools.x < game->col_x)
-		{
-			if (game_test[game->tools.y][game->tools.x] == 'P') 
-			{								
-				game->ppos.y = game->tools.y;
-				game->ppos.x = game->tools.x;
-			}
-			else if (game_test[game->tools.y][game->tools.x] == 'E')
-			{
-				game->epos.y = game->tools.y;
-				game->epos.x = game->tools.x;
-			}
-		}
-	}
-}
-
-void	check_bounds(t_game *game, char **game_test)
-{
-	game->tools.y = 0;
-	game->tools.x = 0;
-	while (game_test[0][game->tools.x] != '\0' && 
-		game_test[0][game->tools.x] != '\n')
-	{
-		if (game_test[0][game->tools.x] != '1')
-			message("ERROR\nIncorrect boundaries. First line has issues\n", game);
-		game->tools.x++;
-	}
-	while (game->tools.y < game->row_y)
-	{
-		if (game_test[game->tools.y][0] != '1' || game_test[game->tools.y][game->col_x -1] != '1')
-			message("ERROR\nIncorrect boundaries. Some line is not starting or ending with 1 \n", game);
-		game->tools.y++;
-	}
-	game->tools.x = 0;
-	while (game_test[game->row_y -1 ][game->tools.x] != '\0' && 
-		game_test[game->row_y -1][game->tools.x] != '\n')
-	{
-
-		if (game_test[game->row_y -1][game->tools.x] != '1')
-			message("ERROR\nIncorrect boundaries. Last line has issues\n", game);
-		game->tools.x++;
-		
-	}
-}
-
-void	flood_fill_macro(char **game_test, t_game *game, int y, int x, int *all_found)
-{
-	if (x < 0 || y < 0 || x >= (game->col_x -1) || y >= (game->row_y -1) || game_test[y][x] == '1' || game_test[y][x] == 'V' || *all_found == 0) //player poss incorrect 17/11/23 15.27
-		return;
-	if (game_test[y][x] == 'C' || game_test[y][x] == 'E')
+	if (ppos.x < 0 || ppos.y < 0 || ppos.x >= (game->col_x - 1)
+		|| ppos.y >= (game->row_y - 1) || game_test[ppos.y][ppos.x] == '1'
+		|| game_test[ppos.y][ppos.x] == 'V' || *all_found == 0)
+		return ;
+	if (game_test[ppos.y][ppos.x] == 'C' || game_test[ppos.y][ppos.x] == 'E')
 		*all_found -= 1;
-	game_test[y][x] = 'V';
-	flood_fill_macro(game_test, game, y, x + 1, all_found);
-	flood_fill_macro(game_test, game, y, x - 1, all_found);
-	flood_fill_macro(game_test, game, y + 1, x, all_found);
-	flood_fill_macro(game_test, game, y - 1, x, all_found);
+	game_test[ppos.y][ppos.x] = 'V';
+	flood_fill_macro(game_test, game, (t_point){ppos.x, ppos.y + 1}, all_found);
+	flood_fill_macro(game_test, game, (t_point){ppos.x, ppos.y - 1}, all_found);
+	flood_fill_macro(game_test, game, (t_point){ppos.x + 1, ppos.y}, all_found);
+	flood_fill_macro(game_test, game, (t_point){ppos.x - 1, ppos.y}, all_found);
 }
 
-char **load_map_file(char *argv, t_game *game)
+char	**load_map_file(char *argv, t_game *game)
 {
 	int		i;
 	int		fd;
 	char	*line;
-	char 	**map;
+	char	**map;
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		message("ERROR\nFile does not open\n", game);
 	i = 0;
 	map = malloc((game->row_y + 1) * sizeof(char *));
-	line = get_next_line(fd);	
+	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		map[i] = ft_strdup(line);
@@ -164,30 +51,28 @@ char **load_map_file(char *argv, t_game *game)
 		i++;
 	}
 	map[i] = NULL;
-	close (fd);
+	close(fd);
 	return (map);
 }
 
 int	check_map_playable(char *argv, t_game *game)
 {
 	char	**game_test;
-	int 	all_found;
+	int		all_found;
+
 	game->map = load_map_file(argv, game);
-	game_test = load_map_file(argv, game); // instead of calling load map, malloc x number of y +1 and strdup x each x or at the same time i save the first, save the test also;
+	game_test = load_map_file(argv, game);
 	game->tools.y = 0;
 	check_bounds(game, game->map);
 	count_obj(game, game->map);
 	find_pos(game, game->map);
 	all_found = game->counter.coin + game->counter.exit;
-	flood_fill_macro(game_test, game, game->ppos.y, game->ppos.x, &all_found);
+	flood_fill_macro(game_test, game, game->ppos, &all_found);
 	ft_freemalloc(game_test, game->row_y);
 	if (all_found != 0)
 		message("ERROR\nObjectives not reachable\n", game);
- 	print_matrix(game->map, game->row_y, game->col_x);
 	return (0);
 }
-
-
 
 int	check_map_size(int fd, t_game *game)
 {
@@ -195,7 +80,7 @@ int	check_map_size(int fd, t_game *game)
 
 	line = get_next_line(fd);
 	if (line == 0)
-		message("ERROR\nError reading first line\n", game);	
+		message("ERROR\nError reading first line\n", game);
 	game->col_x = ft_strlen_n(line);
 	while (line != NULL)
 	{
@@ -221,7 +106,7 @@ int	check_args(int argc, char **argv, t_game *game)
 		message("ERROR\nFile does not open\n", game);
 	if (check_map_size(fd, game) != 0)
 		message("ERROR\nMap not correct\n", game);
-	close (fd);
+	close(fd);
 	check_map_playable(argv[1], game);
 	return (0);
 }
