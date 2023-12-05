@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 15:02:38 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:40:26 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	message(char *msg, t_game *game)
 {
 	ft_printf("%s", msg);
-	(void)game->tools;
+	(void)game;
 	exit(0);
 }
 

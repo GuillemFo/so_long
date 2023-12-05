@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/12/05 15:53:36 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:40:00 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ int	check_map_size(int fd, t_game *game)
 		free(line);
 		line = get_next_line(fd);
 		if (line && (game->col_x != ((int)ft_strlen_n(line))))
+		{
+			free(line);
 			return (1);
+		}
 		game->row_y++;
 	}
 	return (0);
@@ -105,7 +108,10 @@ int	check_args(int argc, char **argv, t_game *game)
 	if (fd < 0)
 		message("ERROR\nFile does not open\n", game);
 	if (check_map_size(fd, game) != 0)
+	{
 		message("ERROR\nMap not correct\n", game);
+		close(fd);
+	}
 	close(fd);
 	check_map_playable(argv[1], game);
 	return (0);

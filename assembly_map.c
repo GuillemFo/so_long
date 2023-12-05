@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:47:03 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 15:57:01 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:43:39 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,14 @@ void	put_images(t_game game)
 {
 	put_floor_walls(&game);
 	put_obj(&game);
+}
+
+int	check_ber(char *argv, char *text)
+{
+	int	tmp;
+
+	tmp = ft_strlen(argv);
+	if (ft_strncmp(&argv[tmp - 4], text, 4) != 0)
+		return (-1);
+	return (0);
 }

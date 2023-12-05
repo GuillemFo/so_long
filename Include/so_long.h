@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 15:38:07 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:34:04 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define SO_LONG_H
 
 # include "../Libft/get_next_line.h"
-# include "libft.h"
 # include "../MiniLibX/mlx.h"
-
+# include "libft.h"
 
 /*###	KEY MAPPING	###*/
 # define ESC_KEY 0x35
@@ -59,15 +58,14 @@
 # define SCROLL_DOWN 5
 
 /*##	DEFINE TO SHORT CODE	##*/
-#	define	img_win	mlx_put_image_to_window
+# define img_win mlx_put_image_to_window
 
-typedef	struct s_data
+typedef struct s_data
 {
 	void	*img_ptr;
 	int		size_l;
 	int		endian;
 }			t_data;
-
 
 typedef struct s_point
 {
@@ -77,56 +75,56 @@ typedef struct s_point
 
 typedef struct s_count
 {
-	int	coin;
-	int	player;
-	int	exit;
-	int	moves;
-}		t_count;
+	int		coin;
+	int		player;
+	int		exit;
+	int		moves;
+}			t_count;
 
-typedef struct s_game		//donde meto la poss de diferentes monedas?
+typedef struct s_game // donde meto la poss de diferentes monedas?
 {
-	void		*mlx;
-	void		*mlx_win;
-	void		*nw_img;
-	char		**map;
-	int			col_x;
-	int			row_y;
-	char		player;
-	char		coin;
-	char		exit;
-	t_point		ppos;
-	t_point		prepos;
-	t_point		next_pos;
-	t_point		coinpos;
-	t_point		epos;
-	t_point		tools;
-	t_count		counter;
-	t_data		img[20];
-}				t_game;
+	void *mlx;
+	void *mlx_win;
+	void *nw_img;
+	char **map;
+	int col_x;
+	int row_y;
+	char player;
+	char coin;
+	char exit;
+	t_point ppos;
+	t_point prepos;
+	t_point next_pos;
+	t_point coinpos;
+	t_point epos;
+	t_point tools;
+	t_count counter;
+	t_data img[20];
+}			t_game;
 
-int	check_args(int argc, char **argv, t_game *game);
-void	message(char *msg, t_game *game);
-void	ft_start_game(t_game *game);
-void	*ft_freemalloc(char **s2, int k);
-int	ft_strlen_n(const char *var);
-int		apply_move(t_game *game, int dir);
-int	moves(int keycode, void *param);
-int	close_window(void *param);
-int	esc_window(int keycode, void *param);
-int	if_prev_door(t_game *game);
-t_game	*precal_next_mv(t_game *game, int dir);
-t_game	*write_move_on_map(t_game *game, int dir);
-int	check_args(int argc, char **argv, t_game *game);
-void	check_bounds(t_game *game, char **game_test);
-void	find_pos(t_game *game, char **game_test);
-void	count_obj(t_game *game, char **game_test);
-void	ft_start_game(t_game *game);
-int	check_ber(char *argv, char *text);
+int			check_args(int argc, char **argv, t_game *game);
+void		message(char *msg, t_game *game);
+void		ft_start_game(t_game *game);
+void		*ft_freemalloc(char **s2, int k);
+int			ft_strlen_n(const char *var);
+int			apply_move(t_game *game, int dir);
+int			moves(int keycode, void *param);
+int			close_window(void *param);
+int			esc_window(int keycode, void *param);
+int			if_prev_door(t_game *game);
+t_game		*precal_next_mv(t_game *game, int dir);
+t_game		*write_move_on_map(t_game *game, int dir);
+int			check_args(int argc, char **argv, t_game *game);
+void		check_bounds(t_game *game, char **game_test);
+void		find_pos(t_game *game, char **game_test);
+void		count_obj(t_game *game, char **game_test);
+void		ft_start_game(t_game *game);
+int			check_ber(char *argv, char *text);
 
 /*IMAGES*/
 
-void	put_images(t_game game);
+void		put_images(t_game game);
 /*Tools*/
-void print_matrix(char **matrix, int rows, int cols);
+void		print_matrix(char **matrix, int rows, int cols);
 
 #endif
