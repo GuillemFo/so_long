@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:14:10 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/11/30 16:11:41 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 10:18:36 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ int	check_move(t_game *game, int dir)
 {
 	if (dir == 0)
 	{
-		if (game->map[game->playerpos.y - 1][game->playerpos.x] == '1')
+		if (game->map[game->ppos.y - 1][game->ppos.x] == '1')
 			return (0);
 	}
 	else if (dir == 1)
 	{
-		if (game->map[game->playerpos.y + 1][game->playerpos.x] == '1')
+		if (game->map[game->ppos.y + 1][game->ppos.x] == '1')
 			return (0);
 	}
 	else if (dir == 2)
 	{
-		if (game->map[game->playerpos.y][game->playerpos.x - 1] == '1')
+		if (game->map[game->ppos.y][game->ppos.x - 1] == '1')
 			return (0);
 	}
 	else if (dir == 3)
 	{
-		if (game->map[game->playerpos.y][game->playerpos.x + 1] == '1')
+		if (game->map[game->ppos.y][game->ppos.x + 1] == '1')
 			return (0);
 	}
 	return (1);
@@ -76,5 +76,5 @@ int	moves(int keycode, void *param)
 		if (check_move(game, 3) == 1)
 			flag = apply_move(game, 3);
 	}
-	return (1); //pending to 
+	return (1); //pending to count moves.
 }

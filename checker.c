@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/11/30 15:25:33 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 10:21:02 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	ft_start_game(t_game *game)
 {
 	game->row_y = 0;
 	game->col_x = 0;
-	game->playerpos.y = 0;
-	game->playerpos.x = 0;
-	game->exitpos.y = 0;
-	game->exitpos.x = 0;
+	game->ppos.y = 0;
+	game->ppos.x = 0;
+	game->epos.y = 0;
+	game->epos.x = 0;
 	game->counter.player = 0;
 	game->counter.coin = 0;
 	game->counter.exit = 0;
@@ -87,13 +87,13 @@ void	find_pos(t_game *game, char **game_test)
 		{
 			if (game_test[game->tools.y][game->tools.x] == 'P') 
 			{								
-				game->playerpos.y = game->tools.y;
-				game->playerpos.x = game->tools.x;
+				game->ppos.y = game->tools.y;
+				game->ppos.x = game->tools.x;
 			}
 			else if (game_test[game->tools.y][game->tools.x] == 'E')
 			{
-				game->exitpos.y = game->tools.y;
-				game->exitpos.x = game->tools.x;
+				game->epos.y = game->tools.y;
+				game->epos.x = game->tools.x;
 			}
 		}
 	}
@@ -103,7 +103,8 @@ void	check_bounds(t_game *game, char **game_test)
 {
 	game->tools.y = 0;
 	game->tools.x = 0;
-	while (game_test[0][game->tools.x] != '\0' && game_test[0][game->tools.x] != '\n')
+	while (game_test[0][game->tools.x] != '\0' && 
+		game_test[0][game->tools.x] != '\n')
 	{
 		if (game_test[0][game->tools.x] != '1')
 			message("ERROR\nIncorrect boundaries. First line has issues\n", game);
@@ -116,7 +117,8 @@ void	check_bounds(t_game *game, char **game_test)
 		game->tools.y++;
 	}
 	game->tools.x = 0;
-	while (game_test[game->row_y -1 ][game->tools.x] != '\0' && game_test[game->row_y -1][game->tools.x] != '\n')
+	while (game_test[game->row_y -1 ][game->tools.x] != '\0' && 
+		game_test[game->row_y -1][game->tools.x] != '\n')
 	{
 
 		if (game_test[game->row_y -1][game->tools.x] != '1')
@@ -177,7 +179,7 @@ int	check_map_playable(char *argv, t_game *game)
 	count_obj(game, game->map);
 	find_pos(game, game->map);
 	all_found = game->counter.coin + game->counter.exit;
-	flood_fill_macro(game_test, game, game->playerpos.y, game->playerpos.x, &all_found);
+	flood_fill_macro(game_test, game, game->ppos.y, game->ppos.x, &all_found);
 	ft_freemalloc(game_test, game->row_y);
 	if (all_found != 0)
 		message("ERROR\nObjectives not reachable\n", game);
