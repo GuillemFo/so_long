@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 10:19:25 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:58:39 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 
+/*##	DEFINE TO SHORT CODE	##*/
+#	define	img_win	mlx_put_image_to_window
+
 typedef	struct s_data
 {
 	void	*img_ptr;
@@ -92,6 +95,7 @@ typedef struct s_game		//donde meto la poss de diferentes monedas?
 	char		coin;
 	char		exit;
 	t_point		ppos;
+	t_point		prepos;
 	t_point		next_pos;
 	t_point		coinpos;
 	t_point		epos;
@@ -107,6 +111,8 @@ void	*ft_freemalloc(char **s2, int k);
 int	ft_strlen_n(const char *var);
 int		apply_move(t_game *game, int dir);
 int	moves(int keycode, void *param);
+int	close_window(void *param);
+int	esc_window(int keycode, void *param);
 
 /*IMAGES*/
 
