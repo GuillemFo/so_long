@@ -4,7 +4,7 @@ NAME = so_long
 PATH_OBJ = tmp/
 
 SRC = so_long.c checker.c utils.c assembly_map.c move_player.c keys_to_moves.c \
-	move_utils2.c checker_utils.c 
+	move_utils2.c checker_utils.c print_moves.c \
 
 OBJ = $(addprefix $(PATH_OBJ),$(SRC:.c=.o))
 	

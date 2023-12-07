@@ -6,30 +6,26 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:54:44 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/07 10:11:27 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:30:23 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
-void	gen_print(t_game *game, t_point floor, t_point player1)
-{
-	img_win(game->mlx, game->mlx_win, game->img[0].img_ptr, floor.x * 64,
-		floor.y * 64);
-	img_win(game->mlx, game->mlx_win, game->img[4].img_ptr, player1.x * 64,
-		player1.y * 64);
-}
-
 void	print_new_player(t_game *game, int dir)
 {
 	if (dir == 0)
-		gen_print(game, (t_point){game->ppos.x, game->ppos.y + 1}, game->ppos);
+		gen_print_up(game, (t_point){game->ppos.x, game->ppos.y + 1},
+			game->ppos);
 	else if (dir == 1)
-		gen_print(game, (t_point){game->ppos.x, game->ppos.y - 1}, game->ppos);
+		gen_print_down(game, (t_point){game->ppos.x, game->ppos.y - 1},
+			game->ppos);
 	else if (dir == 2)
-		gen_print(game, (t_point){game->ppos.x + 1, game->ppos.y}, game->ppos);
+		gen_print_left(game, (t_point){game->ppos.x + 1, game->ppos.y},
+			game->ppos);
 	else if (dir == 3)
-		gen_print(game, (t_point){game->ppos.x - 1, game->ppos.y}, game->ppos);
+		gen_print_right(game, (t_point){game->ppos.x - 1, game->ppos.y},
+			game->ppos);
 }
 
 int	apply_move(t_game *game, int dir)
