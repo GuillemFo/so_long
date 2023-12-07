@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:54:44 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 15:13:13 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:11:27 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	gen_print(t_game *game, t_point floor, t_point player1)
 {
-	img_win(game->mlx, game->mlx_win, game->img[0].img_ptr, floor.x * 32,
-		floor.y * 32);
-	img_win(game->mlx, game->mlx_win, game->img[4].img_ptr, player1.x * 32,
-		player1.y * 32);
+	img_win(game->mlx, game->mlx_win, game->img[0].img_ptr, floor.x * 64,
+		floor.y * 64);
+	img_win(game->mlx, game->mlx_win, game->img[4].img_ptr, player1.x * 64,
+		player1.y * 64);
 }
 
 void	print_new_player(t_game *game, int dir)

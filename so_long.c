@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 17:40:26 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:27:36 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,31 @@ void	message(char *msg, t_game *game)
 
 void	load_image(t_game *game)
 {
-	game->img[0].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/path.xpm",
+	game->img[0].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/grass.xpm",
 			&game->img[0].endian, &game->img[0].size_l);
 	game->img[1].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/wall.xpm",
 			&game->img[0].endian, &game->img[0].size_l);
-	game->img[2].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/coin.xpm",
+	game->img[2].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/log.xpm",
 			&game->img[0].endian, &game->img[0].size_l);
-	game->img[3].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/door.xpm",
+	game->img[3].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/fire.xpm",
 			&game->img[0].endian, &game->img[0].size_l);
-	game->img[4].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/player.xpm",
+	game->img[4].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/front.xpm",
 			&game->img[0].endian, &game->img[0].size_l);
-	game->img[5].img_ptr = mlx_xpm_file_to_image(game->mlx,
-			"images/player_left.xpm", &game->img[0].endian,
-			&game->img[0].size_l);
-	game->img[6].img_ptr = mlx_xpm_file_to_image(game->mlx,
-			"images/door_open.xpm", &game->img[0].endian, &game->img[0].size_l);
-	game->img[7].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/end.xpm",
+	game->img[5].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/left.xpm",
+			&game->img[0].endian, &game->img[0].size_l);
+	game->img[6].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/right.xpm",
+			&game->img[0].endian, &game->img[0].size_l);
+	game->img[7].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/back.xpm",
+			&game->img[0].endian, &game->img[0].size_l);
+	game->img[8].img_ptr = mlx_xpm_file_to_image(game->mlx, "images/end.xpm",
 			&game->img[0].endian, &game->img[0].size_l);
 }
 
 void	start_game(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, game->col_x * 32, game->row_y
-			* 32, "so_long gforns-s");
+	game->mlx_win = mlx_new_window(game->mlx, game->col_x * 64, game->row_y
+			* 64, "so_long gforns-s");
 	load_image(game);
 	put_images(*game);
 	mlx_hook(game->mlx_win, KEYDOWN, 0, moves, game);

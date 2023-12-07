@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:47:03 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 17:43:39 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:19:54 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	put_floor_walls(t_game *game)
 		{
 			if (game->map[y][x] == '1')
 				mlx_put_image_to_window(game->mlx, game->mlx_win,
-					game->img[1].img_ptr, x * 32, y * 32);
+					game->img[1].img_ptr, x * 64, y * 64);
 			else if (game->map[y][x] == '0' || game->map[y][x] == 'C'
 				|| game->map[y][x] == 'P' || game->map[y][x] == 'E')
 				mlx_put_image_to_window(game->mlx, game->mlx_win,
-					game->img[0].img_ptr, x * 32, y * 32);
+					game->img[0].img_ptr, x * 64, y * 64);
 		}
 	}
 }
@@ -49,13 +49,13 @@ void	put_obj(t_game *game)
 		{
 			if (game->map[y][x] == 'C')
 				mlx_put_image_to_window(game->mlx, game->mlx_win,
-					game->img[2].img_ptr, x * 32, y * 32);
+					game->img[2].img_ptr, x * 64, y * 64);
 			else if (game->map[y][x] == 'E')
 				mlx_put_image_to_window(game->mlx, game->mlx_win,
-					game->img[3].img_ptr, x * 32, y * 32);
+					game->img[3].img_ptr, x * 64, y * 64);
 			else if (game->map[y][x] == 'P')
 				mlx_put_image_to_window(game->mlx, game->mlx_win,
-					game->img[4].img_ptr, x * 32, y * 32);
+					game->img[4].img_ptr, x * 64, y * 64);
 		}
 	}
 }
