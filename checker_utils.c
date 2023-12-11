@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:14:07 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/11 08:35:46 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 08:57:05 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_start_game(t_game *game)
 	game->counter.player = 0;
 	game->counter.coin = 0;
 	game->counter.exit = 0;
-	game->counter.moves = 0;
+	game->counter.moves = 1;
 	game->player = 'P';
 	game->coin = 'C';
 	game->exit = 'E';
