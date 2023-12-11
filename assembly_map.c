@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:47:03 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/07 10:19:54 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 08:33:28 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_ber(char *argv, char *text)
 {
 	int	tmp;
 
-	tmp = ft_strlen(argv);
+	tmp = ft_strlen_n(argv);
 	if (ft_strncmp(&argv[tmp - 4], text, 4) != 0)
 		return (-1);
 	return (0);

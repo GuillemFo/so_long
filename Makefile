@@ -9,7 +9,7 @@ SRC = so_long.c checker.c utils.c assembly_map.c move_player.c keys_to_moves.c \
 OBJ = $(addprefix $(PATH_OBJ),$(SRC:.c=.o))
 	
 
-CFLAGS = -Wall -Wextra -Werror -I./Include #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I./Include
 
 all: makelib makeminilibx tmp $(NAME)
 

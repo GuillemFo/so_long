@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/07 11:25:45 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 08:36:54 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ typedef struct s_game // donde meto la poss de diferentes monedas?
 }			t_game;
 
 int			check_args(int argc, char **argv, t_game *game);
-void		message(char *msg, t_game *game);
+void		message(char *msg);
 void		ft_start_game(t_game *game);
-void		*ft_freemalloc(char **s2, int k);
+void		*ft_freemalloc_2(char **s2, int k);
 int			ft_strlen_n(const char *var);
 int			apply_move(t_game *game, int dir);
 int			moves(int keycode, void *param);
@@ -128,7 +128,5 @@ void		gen_print_right(t_game *game, t_point floor, t_point player1);
 /*IMAGES*/
 
 void		put_images(t_game game);
-/*Tools*/
-void		print_matrix(char **matrix, int rows, int cols);
 
 #endif

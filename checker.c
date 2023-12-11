@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/12/05 17:40:00 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 08:36:46 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**load_map_file(char *argv, t_game *game)
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		message("ERROR\nFile does not open\n", game);
+		message("ERROR\nFile does not open\n");
 	i = 0;
 	map = malloc((game->row_y + 1) * sizeof(char *));
 	line = get_next_line(fd);
@@ -45,7 +45,7 @@ char	**load_map_file(char *argv, t_game *game)
 	{
 		map[i] = ft_strdup(line);
 		if (map[i] == NULL)
-			message("ERROR\nCouldn't load the file correctly\n", game);
+			message("ERROR\nCouldn't load the file correctly\n");
 		free(line);
 		line = get_next_line(fd);
 		i++;
@@ -68,9 +68,9 @@ int	check_map_playable(char *argv, t_game *game)
 	find_pos(game, game->map);
 	all_found = game->counter.coin + game->counter.exit;
 	flood_fill_macro(game_test, game, game->ppos, &all_found);
-	ft_freemalloc(game_test, game->row_y);
+	ft_freemalloc_2(game_test, game->row_y);
 	if (all_found != 0)
-		message("ERROR\nObjectives not reachable\n", game);
+		message("ERROR\nObjectives not reachable\n");
 	return (0);
 }
 
@@ -80,7 +80,7 @@ int	check_map_size(int fd, t_game *game)
 
 	line = get_next_line(fd);
 	if (line == 0)
-		message("ERROR\nError reading first line\n", game);
+		message("ERROR\nError reading first line\n");
 	game->col_x = ft_strlen_n(line);
 	while (line != NULL)
 	{
@@ -101,15 +101,15 @@ int	check_args(int argc, char **argv, t_game *game)
 	int	fd;
 
 	if (argc != 2)
-		message("Error, invalid number of arguments\n", game);
+		message("Error, invalid number of arguments\n");
 	if (check_ber(argv[1], ".ber") != 0)
-		message("ERROR\nFile should be .ber type\n", game);
+		message("ERROR\nFile should be .ber type\n");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		message("ERROR\nFile does not open\n", game);
+		message("ERROR\nFile does not open\n");
 	if (check_map_size(fd, game) != 0)
 	{
-		message("ERROR\nMap not correct\n", game);
+		message("ERROR\nMap not correct\n");
 		close(fd);
 	}
 	close(fd);

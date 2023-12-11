@@ -6,17 +6,16 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/07 11:26:39 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 08:35:55 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/so_long.h"
 
 /*		REMINDER: Matrix[Y][X]			*/
-void	message(char *msg, t_game *game)
+void	message(char *msg)
 {
 	ft_printf("%s", msg);
-	(void)game;
 	exit(0);
 }
 

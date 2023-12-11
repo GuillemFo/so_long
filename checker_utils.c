@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:14:07 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/05 17:34:29 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 08:35:46 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	count_obj_utils(t_game *game, char **game_test)
 	{
 		game->counter.player++;
 		if (game->counter.player != 1)
-			message("ERROR\nToo many players\n", game);
+			message("ERROR\nToo many players\n");
 	}
 	else if (game_test[game->tools.y][game->tools.x] == 'C')
 		game->counter.coin++;
@@ -43,10 +43,10 @@ void	count_obj_utils(t_game *game, char **game_test)
 	{
 		game->counter.exit++;
 		if (game->counter.exit != 1)
-			message("ERROR\nToo many exits\n", game);
+			message("ERROR\nToo many exits\n");
 	}
 	else
-		message("ERROR\nWrong imput\n", game);
+		message("ERROR\nWrong imput\n");
 }
 
 void	count_obj(t_game *game, char **game_test)
@@ -65,11 +65,11 @@ void	count_obj(t_game *game, char **game_test)
 		}
 	}
 	if (game->counter.player != 1)
-		message("ERROR\nNo player found\n", game);
+		message("ERROR\nNo player found\n");
 	if (game->counter.exit != 1)
-		message("ERROR\nNo exit found\n", game);
+		message("ERROR\nNo exit found\n");
 	if (game->counter.coin < 1)
-		message("ERROR\nNo coins found\n", game);
+		message("ERROR\nNo coins found\n");
 }
 
 void	find_pos(t_game *game, char **game_test)
@@ -102,14 +102,14 @@ void	check_bounds(t_game *game, char **game_test)
 		&& game_test[0][game->tools.x] != '\n')
 	{
 		if (game_test[0][game->tools.x] != '1')
-			message("ERROR\nIncorrect boundaries.\n", game);
+			message("ERROR\nIncorrect boundaries.\n");
 		game->tools.x++;
 	}
 	while (game->tools.y < game->row_y)
 	{
 		if (game_test[game->tools.y][0] != '1'
 			|| game_test[game->tools.y][game->col_x - 1] != '1')
-			message("ERROR\nIncorrect boundaries.\n", game);
+			message("ERROR\nIncorrect boundaries.\n");
 		game->tools.y++;
 	}
 	game->tools.x = 0;
@@ -117,7 +117,7 @@ void	check_bounds(t_game *game, char **game_test)
 		&& game_test[game->row_y - 1][game->tools.x] != '\n')
 	{
 		if (game_test[game->row_y - 1][game->tools.x] != '1')
-			message("ERROR\nIncorrect boundaries.\n", game);
+			message("ERROR\nIncorrect boundaries.\n");
 		game->tools.x++;
 	}
 }
