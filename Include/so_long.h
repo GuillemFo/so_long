@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/11 08:36:54 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:57:56 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 # define SCROLL_DOWN 5
 
 /*##	DEFINE TO SHORT CODE	##*/
-# define img_win mlx_put_image_to_window
+# define IMG_WIN mlx_put_image_to_window
 
 typedef struct s_data
 {
@@ -81,25 +81,25 @@ typedef struct s_count
 	int		moves;
 }			t_count;
 
-typedef struct s_game // donde meto la poss de diferentes monedas?
+typedef struct s_game
 {
-	void *mlx;
-	void *mlx_win;
-	void *nw_img;
-	char **map;
-	int col_x;
-	int row_y;
-	char player;
-	char coin;
-	char exit;
-	t_point ppos;
-	t_point prepos;
-	t_point next_pos;
-	t_point coinpos;
-	t_point epos;
-	t_point tools;
-	t_count counter;
-	t_data img[20];
+	void	*mlx;
+	void	*mlx_win;
+	void	*nw_img;
+	char	**map;
+	int		col_x;
+	int		row_y;
+	char	player;
+	char	coin;
+	char	exit;
+	t_point	ppos;
+	t_point	prepos;
+	t_point	next_pos;
+	t_point	coinpos;
+	t_point	epos;
+	t_point	tools;
+	t_count	counter;
+	t_data	img[20];
 }			t_game;
 
 int			check_args(int argc, char **argv, t_game *game);
