@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/11 16:57:56 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 10:18:39 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include "../Libft/get_next_line.h"
 # include "../MiniLibX/mlx.h"
 # include "libft.h"
+
+
+
+
+/*### SIZE INSTRUCTIONS ###*/ 
+/*### Screen resolution DIVIDE 128 ###*/
+# define SCREEN_W 
+# define SCREEN_H 
+
+
 
 /*###	KEY MAPPING	###*/
 # define ESC_KEY 0x35

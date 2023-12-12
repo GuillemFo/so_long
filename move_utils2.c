@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:09:48 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/07 10:11:27 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 08:58:44 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	if_prev_door(t_game *game)
 	if (game->prepos.x == game->epos.x && game->prepos.y == game->epos.y)
 	{
 		game->map[game->prepos.y][game->prepos.x] = 'E';
-		img_win(game->mlx, game->mlx_win, game->img[0].img_ptr,
+		IMG_WIN(game->mlx, game->mlx_win, game->img[0].img_ptr,
 			game->prepos.x * 64, game->prepos.y * 64);
-		img_win(game->mlx, game->mlx_win, game->img[3].img_ptr,
+		IMG_WIN(game->mlx, game->mlx_win, game->img[3].img_ptr,
 			game->prepos.x * 64, game->prepos.y * 64);
-		img_win(game->mlx, game->mlx_win, game->img[4].img_ptr,
+		IMG_WIN(game->mlx, game->mlx_win, game->img[4].img_ptr,
 			game->ppos.x * 64, game->ppos.y * 64);
 		return (1);
 	}
