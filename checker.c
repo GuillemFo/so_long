@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:36:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/12/11 08:36:46 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:04:07 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ int	check_map_size(int fd, t_game *game)
 	if (line == 0)
 		message("ERROR\nError reading first line\n");
 	game->col_x = ft_strlen_n(line);
+	if (game->col_x > SCREEN_W || game->col_x > 120)
+		message("ERROR\nMap too big for so_long.h parameters. \
+			\nCheck Instructions\n");
 	while (line != NULL)
 	{
 		free(line);
@@ -92,6 +95,9 @@ int	check_map_size(int fd, t_game *game)
 			return (1);
 		}
 		game->row_y++;
+		if (game->row_y > SCREEN_H || game->row_y > 120)
+			message("ERROR\nMap too big for so_long.h parameters. \
+			\nCheck Instructions\n");
 	}
 	return (0);
 }
