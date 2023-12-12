@@ -6,11 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:23:21 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/12 08:58:44 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:01:40 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Include/so_long.h"
+#include "so_long.h"
 
 void	gen_print_up(t_game *game, t_point floor, t_point player1)
 {
