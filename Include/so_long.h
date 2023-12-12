@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/12 11:15:14 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:53:52 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void		gen_print_up(t_game *game, t_point floor, t_point player1);
 void		gen_print_down(t_game *game, t_point floor, t_point player1);
 void		gen_print_left(t_game *game, t_point floor, t_point player1);
 void		gen_print_right(t_game *game, t_point floor, t_point player1);
+void		*p_malloc(size_t size);
 
 /*IMAGES*/
 

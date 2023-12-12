@@ -6,11 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:54:44 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/07 11:30:23 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:45:38 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Include/so_long.h"
+#include "so_long.h"
 
 void	print_new_player(t_game *game, int dir)
 {

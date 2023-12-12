@@ -6,11 +6,22 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:54:53 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/11 08:30:36 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:55:07 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Include/so_long.h"
+#include "so_long.h"
+
+void	*p_malloc(size_t size)
+{
+	void	*ret;
+
+	ret = malloc(size);
+	if (ret == NULL)
+		exit(0);
+	else
+		return (ret);
+}
 
 void	*ft_freemalloc_2(char **s2, int k)
 {

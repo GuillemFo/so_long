@@ -6,11 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:14:07 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/11 08:57:05 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:32:22 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Include/so_long.h"
+#include "so_long.h"
 
 void	ft_start_game(t_game *game)
 {

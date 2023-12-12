@@ -6,11 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 12:47:03 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/11 08:33:28 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:35:24 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Include/so_long.h"
+#include "so_long.h"
 
 void	put_floor_walls(t_game *game)
 {

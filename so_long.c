@@ -6,11 +6,11 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:16:15 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/11 08:48:47 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 11:45:48 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Include/so_long.h"
+#include "so_long.h"
 
 void	message(char *msg)
 {
