@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:14:10 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/12 11:45:28 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/14 09:05:20 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_thanos(t_game *game)
 	mlx_destroy_window(game->mlx, game->mlx_win);
 	game->mlx_win = mlx_new_window(game->mlx, 1252, 1252,
 			"so_long-win gforns-s");
+	ft_printf("You have gotten enough wood to get through the winter\n");
+	ft_printf("Congrats\n");
 	IMG_WIN(game->mlx, game->mlx_win, game->img[8].img_ptr, 0, 0);
 	mlx_hook(game->mlx_win, DESTROY, 0, close_window, game);
 	mlx_hook(game->mlx_win, KEYDOWN, 0, esc_window, game);

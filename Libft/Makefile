@@ -66,11 +66,11 @@ $(NAME): $(OBJ)
 
 bonus: .bonus
 
-.bonus: $(OBJ) $(BON) ../Include/libft.h
+.bonus: $(OBJ) $(BON) ../Include/libft.h get_next_line.h Makefile
 	ar -crs $(NAME) $(OBJ) $(BON)
 	@touch .bonus
 
-%.o: %.c ../Include/libft.h Makefile
+%.o: %.c ../Include/libft.h get_next_line.h Makefile
 	cc $(CFLAGS) -c $< -o $@ 
 
 re: fclean all

@@ -20,27 +20,30 @@ $(NAME): $(OBJ)
 	cc $(CFLAGS) $(OBJ) ./libft/libft.a -framework OpenGL -framework AppKit -o $(NAME) -L MiniLibX -lmlx
 
 makelib: 
-	$(MAKE) -C ./libft 
+	$(MAKE) -C ./libft bonus
 
 makeminilibx:
 	$(MAKE) -C ./MiniLibX
 
-$(PATH_OBJ)%.o: %.c ./Include/libft.h ./Include/so_long.h Makefile
+$(PATH_OBJ)%.o: %.c ./Include/libft.h ./Include/so_long.h ./Libft/libft.a Makefile
 	@mkdir -p $(dir $@)
 	cc $(CFLAGS) -Imlx -g -c $< -o $@
 
 re: fclean all
 
-makefclean:
+libftfclean:
 	$(MAKE) -C ./libft fclean
 
-makefcleanminilibx:
+minilibxfclean:
 	$(MAKE) -C ./MiniLibX fclean
 
-clean:
+libftclean:
+	$(MAKE) -C ./libft clean
+
+clean: libftclean
 	rm -rf $(PATH_OBJ)
 
-fclean: clean makefclean makefcleanminilibx
+fclean: clean libftfclean minilibxfclean
 	rm -rf $(NAME)
 
 .PHONY: all re clean fclean
