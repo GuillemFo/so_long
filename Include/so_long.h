@@ -6,7 +6,7 @@
 /*   By: gforns-s <gforns-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:47:25 by gforns-s          #+#    #+#             */
-/*   Updated: 2023/12/12 11:53:52 by gforns-s         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:38:48 by gforns-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,8 @@
 # include "../MiniLibX/mlx.h"
 # include "libft.h"
 
-/*### SIZE INSTRUCTIONS ###*/
-/*### Screen resolution DIVIDE 128 and rounded to the smaller one ###*/
-/*### Example: 1920x1080 = 15 W and 8.4 H (so you will round to 8) */
-/*### Max accepted number is 120 in both options ###*/
-/*### I will set the max lenght of map to the values set down ###*/
-# define SCREEN_W 120
-# define SCREEN_H 120
+# define SCREEN_W 40
+# define SCREEN_H 22
 
 /*###	KEY MAPPING	###*/
 # define ESC_KEY 0x35

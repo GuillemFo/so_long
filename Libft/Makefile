@@ -66,7 +66,7 @@ $(NAME): $(OBJ)
 
 bonus: .bonus
 
-.bonus: $(OBJ) $(BON) ../Include/libft.h get_next_line.h Makefile
+.bonus: $(OBJ) $(BON) ../Include/libft.h libft.a get_next_line.h Makefile
 	ar -crs $(NAME) $(OBJ) $(BON)
 	@touch .bonus
 
