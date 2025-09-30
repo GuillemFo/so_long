@@ -52,9 +52,10 @@ Create a 2D game where:
 - **At least 1 collectible**
 - **Exactly 1 player start position**
 - **Valid path** must exist
-- **No duplicate characters** (exit/start)
+- **No duplicate characters** (exit/start)  
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/J5c-WpOGoOc" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J5c-WpOGoOc" frameborder="0" allowfullscreen></iframe>  
+
 ## 🎯 Gameplay Features
 
 ### Player Movement
