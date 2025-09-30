@@ -53,8 +53,8 @@ Create a 2D game where:
 - **Exactly 1 player start position**
 - **Valid path** must exist
 - **No duplicate characters** (exit/start)  
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/J5c-WpOGoOc" frameborder="0" allowfullscreen></iframe>  
+# Demo
+[![Demo here](https://img.youtube.com/vi/J5c-WpOGoOc/0.jpg)](https://www.youtube.com/watch?v=J5c-WpOGoOc)
 
 ## 🎯 Gameplay Features
 
